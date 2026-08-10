@@ -10,7 +10,7 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
   background:#fff;color:#222;line-height:1.6;
 }
-.wrap{max-width:1000px;margin:0 auto;padding:32px 20px 56px;}
+.wrap{max-width:1120px;margin:0 auto;padding:32px 20px 56px;}
 h1{font-size:26px;font-weight:700;letter-spacing:0.04em;}
 .lead{font-size:13.5px;color:#555;margin:10px 0 4px;}
 .lead b{color:#222;}
@@ -21,27 +21,28 @@ h2{
 .sub{font-size:12.5px;color:#888;margin:-8px 0 12px;}
 
 /* 人物卡片 */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(500px,1fr));gap:18px;}
 .card{
-  display:flex;gap:14px;background:#fafafa;border:1px solid #e8e8e8;
-  border-radius:10px;padding:14px;align-items:flex-start;
+  display:flex;gap:18px;background:#fafafa;border:1px solid #e8e8e8;
+  border-radius:12px;padding:18px;align-items:flex-start;
 }
-.portrait{flex:0 0 110px;width:110px;height:138px;border-radius:8px;overflow:hidden;background:#eee;}
-.portrait img{width:100%;height:100%;object-fit:cover;display:block;}
-.portrait .noimg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;}
+.left{flex:0 0 auto;display:flex;flex-direction:column;gap:10px;}
+.ph{margin:0;width:190px;}
+.ph img{width:190px;height:230px;object-fit:cover;border-radius:8px;display:block;background:#eee;}
+.ph figcaption{font-size:11px;color:#999;text-align:center;margin-top:4px;}
 .info{flex:1;min-width:0;}
-.nm{font-size:17px;font-weight:700;}
-.nm .py{display:block;font-size:11.5px;font-weight:400;color:#a0482e;margin-top:1px;}
-.note{display:block;font-size:11.5px;color:#888;margin-top:2px;}
-.channels{display:flex;gap:8px;margin-top:10px;}
-.chan{
-  flex:1;background:#fff;border:1px solid #eee;border-radius:8px;
-  padding:8px;text-align:center;
-}
-.chan img{width:52px;height:64px;object-fit:cover;border-radius:5px;display:block;margin:0 auto 5px;background:#eee;}
-.chan .who{display:block;font-size:12.5px;font-weight:600;}
-.chan .who.dash{color:#ccc;font-weight:400;}
-.chan .tag{display:block;font-size:10.5px;color:#999;margin-top:1px;}
+.nm{font-size:20px;font-weight:700;}
+.nm .py{display:block;font-size:12px;font-weight:400;color:#a0482e;margin-top:2px;}
+.note{display:block;font-size:12px;color:#888;margin-top:3px;}
+.channels{display:flex;gap:14px;margin-top:14px;}
+.ch{flex:1;margin:0;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 10px 10px;}
+.ch img{width:96px;height:118px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}
+.ch figcaption{font-size:12.5px;}
+.ch .who{display:block;font-weight:600;}
+.ch .who.dash{color:#ccc;font-weight:400;}
+.ch .tag{display:block;font-size:10.5px;color:#999;margin-top:2px;}
+.ch.empty .noimg{width:96px;height:118px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}
+.noimg{display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;}
 
 /* 地图 */
 .map-frame{border:1px solid #e8e8e8;border-radius:8px;background:#fafafa;padding:10px;}
@@ -60,6 +61,13 @@ table.geo{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
 .geo td.m{white-space:nowrap;}
 .geo tbody tr:nth-child(even){background:#fafafa;}
 .footnote{font-size:11.5px;color:#999;text-align:center;margin-top:28px;border-top:1px solid #eee;padding-top:14px;}
+@media (max-width:560px){
+  .cards{grid-template-columns:1fr;}
+  .card{flex-direction:column;}
+  .left{flex-direction:row;}
+  .ph{width:140px;}
+  .ph img{width:140px;height:170px;}
+}
 </style>
 </head>
 <body>
@@ -68,393 +76,393 @@ table.geo{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
   <p class="lead">
     融合两部作品：<b>动画电影《三国的星空第一部》</b>（讨董→官渡，曹操视角）与
     <b>电视剧《大军师司马懿》</b>（军师联盟 / 虎啸龙吟）。
-    每个角色标注历史画像、电影配音演员与电视剧演员；单渠道出现的人物另一栏留空。
+    每个角色标注历史画像、电影角色形象、电影配音演员与电视剧演员；单渠道出现的人物另一栏留空。
   </p>
 
   <h2>人物</h2>
-  <p class="sub">左列为人物历史画像，右下列出电影/电视剧两渠道扮演者。照片为演员本人公开照。</p>
+  <p class="sub">左侧为历史画像与电影角色形象，右侧为电影/电视剧两渠道扮演者照片。照片为演员本人公开照。</p>
   <div class="cards">
 
     <div class="card">
-      <div class="portrait"><img src="images/history/曹操.jpg" alt="曹操画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/曹操.jpg" alt="曹操历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">曹操<br><span class=py>Cáo Cāo</span></div>
         <span class="note">字孟德</span>
         <div class="channels">
-          <div class="chan"><img src="images/actors/檀健次.jpg" alt="檀健次" loading="lazy"><span class="who">檀健次</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/于和伟.jpg" alt="于和伟" loading="lazy"><span class="who">于和伟</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch"><img src="images/actors/檀健次.jpg" alt="檀健次" loading="lazy"><figcaption><span class="who">檀健次</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/于和伟.jpg" alt="于和伟" loading="lazy"><figcaption><span class="who">于和伟</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/荀彧.jpg" alt="荀彧画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/荀彧.jpg" alt="荀彧历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">荀彧<br><span class=py>Xún Yù</span></div>
         <span class="note">彧 yù</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/王劲松.jpg" alt="王劲松" loading="lazy"><span class="who">王劲松</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch"><img src="images/actors/囧森瑟夫.jpg" alt="囧森瑟夫" loading="lazy"><figcaption><span class="who">囧森瑟夫</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/王劲松.jpg" alt="王劲松" loading="lazy"><figcaption><span class="who">王劲松</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/夏侯惇.jpg" alt="夏侯惇画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/夏侯惇.jpg" alt="夏侯惇历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">夏侯惇<br><span class=py>Xiàhóu Dūn</span></div>
         <span class="note">惇 dūn</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/杨涵斌.jpg" alt="杨涵斌" loading="lazy"><span class="who">杨涵斌</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/杨涵斌.jpg" alt="杨涵斌" loading="lazy"><figcaption><span class="who">杨涵斌</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/曹洪.jpg" alt="曹洪画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/曹洪.jpg" alt="曹洪历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">曹洪<br><span class=py>Cáo Hóng</span></div>
         <span class="note">字子廉</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/陈之辉.jpg" alt="陈之辉" loading="lazy"><span class="who">陈之辉</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch"><img src="images/actors/巽辰.jpg" alt="巽辰" loading="lazy"><figcaption><span class="who">巽辰</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/陈之辉.jpg" alt="陈之辉" loading="lazy"><figcaption><span class="who">陈之辉</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><figure class="ph"><img src="images/history/张郃.jpg" alt="张郃历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">张郃<br><span class=py>Zhāng Hé</span></div>
         <span class="note">郃 hé</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/郭家诺.jpg" alt="郭家诺" loading="lazy"><span class="who">郭家诺</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch"><img src="images/actors/一舟.jpg" alt="一舟" loading="lazy"><figcaption><span class="who">一舟</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/郭家诺.jpg" alt="郭家诺" loading="lazy"><figcaption><span class="who">郭家诺</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/汉献帝.jpg" alt="汉献帝·刘协画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/汉献帝.jpg" alt="汉献帝·刘协历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">汉献帝 · 刘协<br><span class=py>Liú Xié</span></div>
         <span class="note">末代天子</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/董承.jpg" alt="董承画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/董承.jpg" alt="董承历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">董承<br><span class=py>Dǒng Chéng</span></div>
         
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/赵彦民.jpg" alt="赵彦民" loading="lazy"><span class="who">赵彦民</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/赵彦民.jpg" alt="赵彦民" loading="lazy"><figcaption><span class="who">赵彦民</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/许褚.jpg" alt="许褚画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/许褚.jpg" alt="许褚历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">许褚<br><span class=py>Xǔ Chǔ</span></div>
         <span class="note">褚 chǔ</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch"><img src="images/actors/良生.jpg" alt="良生" loading="lazy"><figcaption><span class="who">良生</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/郭嘉.jpg" alt="郭嘉画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/郭嘉.jpg" alt="郭嘉历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">郭嘉<br><span class=py>Guō Jiā</span></div>
         <span class="note">字奉孝</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/曹磊.jpg" alt="曹磊" loading="lazy"><span class="who">曹磊</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/曹磊.jpg" alt="曹磊" loading="lazy"><figcaption><span class="who">曹磊</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/袁绍.jpg" alt="袁绍画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/袁绍.jpg" alt="袁绍历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">袁绍<br><span class=py>Yuán Shào</span></div>
         <span class="note">字本初</span>
         <div class="channels">
-          <div class="chan"><img src="images/actors/路金波.jpg" alt="路金波" loading="lazy"><span class="who">路金波</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch"><img src="images/actors/路金波.jpg" alt="路金波" loading="lazy"><figcaption><span class="who">路金波</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">许攸<br><span class=py>Xǔ Yōu</span></div>
         <span class="note">攸 yōu</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">麦子<br><span class=py>Mài zi</span></div>
         <span class="note">曹操的狗</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">渠穆<br><span class=py>Qú Mù</span></div>
         <span class="note">渠 qú</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">师父<br><span class=py>Shīfu</span></div>
         <span class="note">易中天客串</span>
         <div class="channels">
-          <div class="chan"><img src="images/actors/易中天.jpg" alt="易中天" loading="lazy"><span class="who">易中天</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch"><img src="images/actors/易中天.jpg" alt="易中天" loading="lazy"><figcaption><span class="who">易中天</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">童子<br><span class=py>Tóngzǐ</span></div>
         
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/司马懿.jpg" alt="司马懿画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/司马懿.jpg" alt="司马懿历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">司马懿<br><span class=py>Sīmǎ Yì</span></div>
         <span class="note">懿 yì</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/吴秀波.jpg" alt="吴秀波" loading="lazy"><span class="who">吴秀波</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/吴秀波.jpg" alt="吴秀波" loading="lazy"><figcaption><span class="who">吴秀波</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">张春华<br><span class=py>Zhāng Chūnhuá</span></div>
         
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/刘涛.jpg" alt="刘涛" loading="lazy"><span class="who">刘涛</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/刘涛.jpg" alt="刘涛" loading="lazy"><figcaption><span class="who">刘涛</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/曹丕.jpg" alt="曹丕画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/曹丕.jpg" alt="曹丕历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">曹丕<br><span class=py>Cáo Pī</span></div>
         <span class="note">字子桓</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/李晨.jpg" alt="李晨" loading="lazy"><span class="who">李晨</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/李晨.jpg" alt="李晨" loading="lazy"><figcaption><span class="who">李晨</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">柏灵筠<br><span class=py>Bǎi Língyún</span></div>
         <span class="note">柏 bǎi</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/张钧甯.jpg" alt="张钧甯" loading="lazy"><span class="who">张钧甯</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/张钧甯.jpg" alt="张钧甯" loading="lazy"><figcaption><span class="who">张钧甯</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><figure class="ph"><img src="images/history/郭照.png" alt="郭照历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">郭照<br><span class=py>Guō Zhào</span></div>
         
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/唐艺昕.jpg" alt="唐艺昕" loading="lazy"><span class="who">唐艺昕</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/唐艺昕.jpg" alt="唐艺昕" loading="lazy"><figcaption><span class="who">唐艺昕</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/杨修.jpg" alt="杨修画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/杨修.jpg" alt="杨修历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">杨修<br><span class=py>Yáng Xiū</span></div>
         <span class="note">字德祖</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/翟天临.jpg" alt="翟天临" loading="lazy"><span class="who">翟天临</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/翟天临.jpg" alt="翟天临" loading="lazy"><figcaption><span class="who">翟天临</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/甄宓.jpg" alt="甄宓画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/甄宓.jpg" alt="甄宓历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">甄宓<br><span class=py>Zhēn Fú</span></div>
         <span class="note">宓 fú</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/曹植.jpg" alt="曹植画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/曹植.jpg" alt="曹植历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">曹植<br><span class=py>Cáo Zhí</span></div>
         <span class="note">字子建</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/王仁君.jpg" alt="王仁君" loading="lazy"><span class="who">王仁君</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/王仁君.jpg" alt="王仁君" loading="lazy"><figcaption><span class="who">王仁君</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/曹叡.png" alt="曹叡画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/曹叡.png" alt="曹叡历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">曹叡<br><span class=py>Cáo Ruì</span></div>
         <span class="note">叡 ruì</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/刘欢.jpg" alt="刘欢" loading="lazy"><span class="who">刘欢</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/刘欢.jpg" alt="刘欢" loading="lazy"><figcaption><span class="who">刘欢</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/诸葛亮.jpg" alt="诸葛亮画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/诸葛亮.jpg" alt="诸葛亮历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">诸葛亮<br><span class=py>Zhūgě Liàng</span></div>
         <span class="note">字孔明</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/曹真.jpg" alt="曹真画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/曹真.jpg" alt="曹真历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">曹真<br><span class=py>Cáo Zhēn</span></div>
         <span class="note">字子丹</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/章贺.jpg" alt="章贺" loading="lazy"><span class="who">章贺</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/章贺.jpg" alt="章贺" loading="lazy"><figcaption><span class="who">章贺</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">曹休<br><span class=py>Cáo Xiū</span></div>
         <span class="note">字文烈</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/曹爽.png" alt="曹爽画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/曹爽.png" alt="曹爽历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">曹爽<br><span class=py>Cáo Shuǎng</span></div>
         <span class="note">字昭伯</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><figure class="ph"><img src="images/history/司马师.jpg" alt="司马师历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">司马师<br><span class=py>Sīmǎ Shī</span></div>
         <span class="note">字子元</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><img src="images/history/司马昭.jpg" alt="司马昭画像" loading="lazy"></div>
+      <div class="left"><figure class="ph"><img src="images/history/司马昭.jpg" alt="司马昭历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure></div>
       <div class="info">
         <div class="nm">司马昭<br><span class=py>Sīmǎ Zhāo</span></div>
         <span class="note">字子上</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/檀健次.jpg" alt="檀健次" loading="lazy"><span class="who">檀健次</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/檀健次.jpg" alt="檀健次" loading="lazy"><figcaption><span class="who">檀健次</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">司马孚<br><span class=py>Sīmǎ Fú</span></div>
         <span class="note">字叔达</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><img src="images/actors/王东.jpg" alt="王东" loading="lazy"><span class="who">王东</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch"><img src="images/actors/王东.jpg" alt="王东" loading="lazy"><figcaption><span class="who">王东</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="portrait"><div class="noimg">无画像</div></div>
+      <div class="left"><div class="noimg">无画像</div></div>
       <div class="info">
         <div class="nm">侯吉<br><span class=py>Hóu Jí</span></div>
         <span class="note">虚构角色</span>
         <div class="channels">
-          <div class="chan"><span class="who dash">—</span><span class="tag">电影配音</span></div>
-          <div class="chan"><span class="who dash">—</span><span class="tag">电视剧演员</span></div>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>
+          <figure class="ch empty"><div class="noimg">—</div><figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>
         </div>
       </div>
     </div>
@@ -550,8 +558,7 @@ table.geo{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
   </table>
 
   <p class="footnote">
-    历史画像来源：维基百科/维基共享资源（多为明清刻本画像）· 演员照片为演员本人公开照 · 地点为方位示意 ·
-    生僻字已注音 · 人物资料据豆瓣/百度百科
+    历史画像来源：维基百科/维基共享资源（多为明清刻本画像）· 电影角色形象与剧照来源：电影官方物料/媒体报道 · 演员照片为演员本人公开照 · 地点为方位示意 · 生僻字已注音 · 人物资料据豆瓣/百度百科
   </p>
 </div>
 </body>

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""生成三国融合页面 index.html（人物卡片含历史画像+演员照片+地图）"""
+"""生成三国融合页面 index.html（人物卡片含历史画像+电影角色图+演员照片+地图）"""
 import json, os
 
 REPO = "/tmp/three-kingdoms-repo"
@@ -16,64 +16,83 @@ def img_path(folder, name, ext=None):
             return f"{folder}/{f}"
     return None
 
-# 人物数据: 名字 / 拼音注音 / 电影(配音) / 电视剧(演员)
+# 人物数据: (名字, 显示名+拼音, 备注, 电影配音演员, 电视剧演员, 历史画像名, 电影角色图名)
 PEOPLE = [
     # ==== 核心（两个渠道都有） ====
-    ("曹操","曹操<br><span class=py>Cáo Cāo</span>","字孟德","檀健次","于和伟","曹操"),
-    ("荀彧","荀彧<br><span class=py>Xún Yù</span>","彧 yù","囧森瑟夫","王劲松","荀彧"),
-    ("夏侯惇","夏侯惇<br><span class=py>Xiàhóu Dūn</span>","惇 dūn","肖合来提·艾尼","杨涵斌","夏侯惇"),
-    ("曹洪","曹洪<br><span class=py>Cáo Hóng</span>","字子廉","巽辰","陈之辉","曹洪"),
-    ("张郃","张郃<br><span class=py>Zhāng Hé</span>","郃 hé","一舟","郭家诺","张郃"),
-    ("汉献帝·刘协","汉献帝 · 刘协<br><span class=py>Liú Xié</span>","末代天子","旺旺","王茂蕾","汉献帝"),
-    ("董承","董承<br><span class=py>Dǒng Chéng</span>","","杨卫","赵彦民","董承"),
-    ("许褚","许褚<br><span class=py>Xǔ Chǔ</span>","褚 chǔ","良生","李龙","许褚"),
-    ("郭嘉","郭嘉<br><span class=py>Guō Jiā</span>","字奉孝","","曹磊","郭嘉"),
+    ("曹操","曹操<br><span class=py>Cáo Cāo</span>","字孟德","檀健次","于和伟","曹操","曹操"),
+    ("荀彧","荀彧<br><span class=py>Xún Yù</span>","彧 yù","囧森瑟夫","王劲松","荀彧","荀彧"),
+    ("夏侯惇","夏侯惇<br><span class=py>Xiàhóu Dūn</span>","惇 dūn","肖合来提·艾尼","杨涵斌","夏侯惇","夏侯惇"),
+    ("曹洪","曹洪<br><span class=py>Cáo Hóng</span>","字子廉","巽辰","陈之辉","曹洪","曹洪"),
+    ("张郃","张郃<br><span class=py>Zhāng Hé</span>","郃 hé","一舟","郭家诺","张郃","张郃"),
+    ("汉献帝·刘协","汉献帝 · 刘协<br><span class=py>Liú Xié</span>","末代天子","旺旺","王茂蕾","汉献帝","刘协"),
+    ("董承","董承<br><span class=py>Dǒng Chéng</span>","","杨卫","赵彦民","董承","董承"),
+    ("许褚","许褚<br><span class=py>Xǔ Chǔ</span>","褚 chǔ","良生","李龙","许褚","许褚"),
+    ("郭嘉","郭嘉<br><span class=py>Guō Jiā</span>","字奉孝","","曹磊","郭嘉",""),
     # ==== 仅电影 ====
-    ("袁绍","袁绍<br><span class=py>Yuán Shào</span>","字本初","路金波","","袁绍"),
-    ("许攸","许攸<br><span class=py>Xǔ Yōu</span>","攸 yōu","任俊鹏","","许攸"),
-    ("麦子","麦子<br><span class=py>Mài zi</span>","曹操的狗","方浩然","",""),
-    ("渠穆","渠穆<br><span class=py>Qú Mù</span>","渠 qú","沉寂","",""),
-    ("师父","师父<br><span class=py>Shīfu</span>","易中天客串","易中天","",""),
-    ("童子","童子<br><span class=py>Tóngzǐ</span>","","李潇宇","",""),
+    ("袁绍","袁绍<br><span class=py>Yuán Shào</span>","字本初","路金波","","袁绍","袁绍"),
+    ("许攸","许攸<br><span class=py>Xǔ Yōu</span>","攸 yōu","任俊鹏","","许攸","许攸"),
+    ("麦子","麦子<br><span class=py>Mài zi</span>","曹操的狗","方浩然","","","麦子"),
+    ("渠穆","渠穆<br><span class=py>Qú Mù</span>","渠 qú","沉寂","","","渠穆"),
+    ("师父","师父<br><span class=py>Shīfu</span>","易中天客串","易中天","","","师父"),
+    ("童子","童子<br><span class=py>Tóngzǐ</span>","","李潇宇","","","童子"),
     # ==== 仅电视剧 ====
-    ("司马懿","司马懿<br><span class=py>Sīmǎ Yì</span>","懿 yì","","吴秀波","司马懿"),
-    ("张春华","张春华<br><span class=py>Zhāng Chūnhuá</span>","","","刘涛","张春华"),
-    ("曹丕","曹丕<br><span class=py>Cáo Pī</span>","字子桓","","李晨","曹丕"),
-    ("柏灵筠","柏灵筠<br><span class=py>Bǎi Língyún</span>","柏 bǎi","","张钧甯",""),
-    ("郭照","郭照<br><span class=py>Guō Zhào</span>","","","唐艺昕","郭照"),
-    ("杨修","杨修<br><span class=py>Yáng Xiū</span>","字德祖","","翟天临","杨修"),
-    ("甄宓","甄宓<br><span class=py>Zhēn Fú</span>","宓 fú","","张芷溪","甄宓"),
-    ("曹植","曹植<br><span class=py>Cáo Zhí</span>","字子建","","王仁君","曹植"),
-    ("曹叡","曹叡<br><span class=py>Cáo Ruì</span>","叡 ruì","","刘欢","曹叡"),
-    ("诸葛亮","诸葛亮<br><span class=py>Zhūgě Liàng</span>","字孔明","","王洛勇","诸葛亮"),
-    ("曹真","曹真<br><span class=py>Cáo Zhēn</span>","字子丹","","章贺","曹真"),
-    ("曹休","曹休<br><span class=py>Cáo Xiū</span>","字文烈","","杜星奇","曹休"),
-    ("曹爽","曹爽<br><span class=py>Cáo Shuǎng</span>","字昭伯","","杜奕衡","曹爽"),
-    ("司马师","司马师<br><span class=py>Sīmǎ Shī</span>","字子元","","肖顺尧","司马师"),
-    ("司马昭","司马昭<br><span class=py>Sīmǎ Zhāo</span>","字子上","","檀健次","司马昭"),
-    ("司马孚","司马孚<br><span class=py>Sīmǎ Fú</span>","字叔达","","王东","司马孚"),
-    ("侯吉","侯吉<br><span class=py>Hóu Jí</span>","虚构角色","","来喜",""),
+    ("司马懿","司马懿<br><span class=py>Sīmǎ Yì</span>","懿 yì","","吴秀波","司马懿",""),
+    ("张春华","张春华<br><span class=py>Zhāng Chūnhuá</span>","","","刘涛","张春华",""),
+    ("曹丕","曹丕<br><span class=py>Cáo Pī</span>","字子桓","","李晨","曹丕",""),
+    ("柏灵筠","柏灵筠<br><span class=py>Bǎi Língyún</span>","柏 bǎi","","张钧甯","",""),
+    ("郭照","郭照<br><span class=py>Guō Zhào</span>","","","唐艺昕","郭照",""),
+    ("杨修","杨修<br><span class=py>Yáng Xiū</span>","字德祖","","翟天临","杨修",""),
+    ("甄宓","甄宓<br><span class=py>Zhēn Fú</span>","宓 fú","","张芷溪","甄宓",""),
+    ("曹植","曹植<br><span class=py>Cáo Zhí</span>","字子建","","王仁君","曹植",""),
+    ("曹叡","曹叡<br><span class=py>Cáo Ruì</span>","叡 ruì","","刘欢","曹叡",""),
+    ("诸葛亮","诸葛亮<br><span class=py>Zhūgě Liàng</span>","字孔明","","王洛勇","诸葛亮",""),
+    ("曹真","曹真<br><span class=py>Cáo Zhēn</span>","字子丹","","章贺","曹真",""),
+    ("曹休","曹休<br><span class=py>Cáo Xiū</span>","字文烈","","杜星奇","曹休",""),
+    ("曹爽","曹爽<br><span class=py>Cáo Shuǎng</span>","字昭伯","","杜奕衡","曹爽",""),
+    ("司马师","司马师<br><span class=py>Sīmǎ Shī</span>","字子元","","肖顺尧","司马师",""),
+    ("司马昭","司马昭<br><span class=py>Sīmǎ Zhāo</span>","字子上","","檀健次","司马昭",""),
+    ("司马孚","司马孚<br><span class=py>Sīmǎ Fú</span>","字叔达","","王东","司马孚",""),
+    ("侯吉","侯吉<br><span class=py>Hóu Jí</span>","虚构角色","","来喜","",""),
 ]
 
 # 生成卡片 HTML
 cards = []
-for name, disp, note, mv, tv, hist in PEOPLE:
+for name, disp, note, mv, tv, hist, mvchar in PEOPLE:
     hist_img = img_path("images/history", hist) if hist else None
     mv_img = img_path("images/actors", mv) if mv else None
     tv_img = img_path("images/actors", tv) if tv else None
+    mvc_img = img_path("images/movie", mvchar) if mvchar else None
     note_html = f'<span class="note">{note}</span>' if note else ""
-    hist_html = f'<img src="{hist_img}" alt="{name}画像" loading="lazy">' if hist_img else '<div class="noimg">无画像</div>'
-    mv_html = f'<img src="{mv_img}" alt="{mv}" loading="lazy"><span class="who">{mv}</span><span class="tag">电影配音</span>' if mv_img and mv else '<span class="who dash">—</span><span class="tag">电影配音</span>'
-    tv_html = f'<img src="{tv_img}" alt="{tv}" loading="lazy"><span class="who">{tv}</span><span class="tag">电视剧演员</span>' if tv_img and tv else '<span class="who dash">—</span><span class="tag">电视剧演员</span>'
+
+    # 左侧：历史画像（大图） + 电影角色图
+    left_imgs = []
+    if hist_img:
+        left_imgs.append(f'<figure class="ph"><img src="{hist_img}" alt="{name}历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure>')
+    if mvc_img:
+        left_imgs.append(f'<figure class="ph"><img src="{mvc_img}" alt="{name}电影形象" loading="lazy"><figcaption>电影《三国的星空》</figcaption></figure>')
+    left_html = "".join(left_imgs) if left_imgs else '<div class="noimg">无画像</div>'
+
+    # 右侧：电影配音演员 + 电视剧演员（横向两张）
+    mv_html = (f'<figure class="ch"><img src="{mv_img}" alt="{mv}" loading="lazy">'
+               f'<figcaption><span class="who">{mv}</span><span class="tag">电影配音</span></figcaption></figure>'
+               if mv_img and mv else
+               f'<figure class="ch empty"><div class="noimg">—</div>'
+               f'<figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>')
+    tv_html = (f'<figure class="ch"><img src="{tv_img}" alt="{tv}" loading="lazy">'
+               f'<figcaption><span class="who">{tv}</span><span class="tag">电视剧演员</span></figcaption></figure>'
+               if tv_img and tv else
+               f'<figure class="ch empty"><div class="noimg">—</div>'
+               f'<figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>')
+
     cards.append(f'''
     <div class="card">
-      <div class="portrait">{hist_html}</div>
+      <div class="left">{left_html}</div>
       <div class="info">
         <div class="nm">{disp}</div>
         {note_html}
         <div class="channels">
-          <div class="chan">{mv_html}</div>
-          <div class="chan">{tv_html}</div>
+          {mv_html}
+          {tv_html}
         </div>
       </div>
     </div>''')
@@ -92,7 +111,7 @@ body{{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
   background:#fff;color:#222;line-height:1.6;
 }}
-.wrap{{max-width:1000px;margin:0 auto;padding:32px 20px 56px;}}
+.wrap{{max-width:1120px;margin:0 auto;padding:32px 20px 56px;}}
 h1{{font-size:26px;font-weight:700;letter-spacing:0.04em;}}
 .lead{{font-size:13.5px;color:#555;margin:10px 0 4px;}}
 .lead b{{color:#222;}}
@@ -103,27 +122,28 @@ h2{{
 .sub{{font-size:12.5px;color:#888;margin:-8px 0 12px;}}
 
 /* 人物卡片 */
-.cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}}
+.cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(500px,1fr));gap:18px;}}
 .card{{
-  display:flex;gap:14px;background:#fafafa;border:1px solid #e8e8e8;
-  border-radius:10px;padding:14px;align-items:flex-start;
+  display:flex;gap:18px;background:#fafafa;border:1px solid #e8e8e8;
+  border-radius:12px;padding:18px;align-items:flex-start;
 }}
-.portrait{{flex:0 0 110px;width:110px;height:138px;border-radius:8px;overflow:hidden;background:#eee;}}
-.portrait img{{width:100%;height:100%;object-fit:cover;display:block;}}
-.portrait .noimg{{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;}}
+.left{{flex:0 0 auto;display:flex;flex-direction:column;gap:10px;}}
+.ph{{margin:0;width:190px;}}
+.ph img{{width:190px;height:230px;object-fit:cover;border-radius:8px;display:block;background:#eee;}}
+.ph figcaption{{font-size:11px;color:#999;text-align:center;margin-top:4px;}}
 .info{{flex:1;min-width:0;}}
-.nm{{font-size:17px;font-weight:700;}}
-.nm .py{{display:block;font-size:11.5px;font-weight:400;color:#a0482e;margin-top:1px;}}
-.note{{display:block;font-size:11.5px;color:#888;margin-top:2px;}}
-.channels{{display:flex;gap:8px;margin-top:10px;}}
-.chan{{
-  flex:1;background:#fff;border:1px solid #eee;border-radius:8px;
-  padding:8px;text-align:center;
-}}
-.chan img{{width:52px;height:64px;object-fit:cover;border-radius:5px;display:block;margin:0 auto 5px;background:#eee;}}
-.chan .who{{display:block;font-size:12.5px;font-weight:600;}}
-.chan .who.dash{{color:#ccc;font-weight:400;}}
-.chan .tag{{display:block;font-size:10.5px;color:#999;margin-top:1px;}}
+.nm{{font-size:20px;font-weight:700;}}
+.nm .py{{display:block;font-size:12px;font-weight:400;color:#a0482e;margin-top:2px;}}
+.note{{display:block;font-size:12px;color:#888;margin-top:3px;}}
+.channels{{display:flex;gap:14px;margin-top:14px;}}
+.ch{{flex:1;margin:0;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 10px 10px;}}
+.ch img{{width:96px;height:118px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}}
+.ch figcaption{{font-size:12.5px;}}
+.ch .who{{display:block;font-weight:600;}}
+.ch .who.dash{{color:#ccc;font-weight:400;}}
+.ch .tag{{display:block;font-size:10.5px;color:#999;margin-top:2px;}}
+.ch.empty .noimg{{width:96px;height:118px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}}
+.noimg{{display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;}}
 
 /* 地图 */
 .map-frame{{border:1px solid #e8e8e8;border-radius:8px;background:#fafafa;padding:10px;}}
@@ -142,6 +162,13 @@ table.geo{{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
 .geo td.m{{white-space:nowrap;}}
 .geo tbody tr:nth-child(even){{background:#fafafa;}}
 .footnote{{font-size:11.5px;color:#999;text-align:center;margin-top:28px;border-top:1px solid #eee;padding-top:14px;}}
+@media (max-width:560px){{
+  .cards{{grid-template-columns:1fr;}}
+  .card{{flex-direction:column;}}
+  .left{{flex-direction:row;}}
+  .ph{{width:140px;}}
+  .ph img{{width:140px;height:170px;}}
+}}
 </style>
 </head>
 <body>
@@ -150,11 +177,11 @@ table.geo{{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
   <p class="lead">
     融合两部作品：<b>动画电影《三国的星空第一部》</b>（讨董→官渡，曹操视角）与
     <b>电视剧《大军师司马懿》</b>（军师联盟 / 虎啸龙吟）。
-    每个角色标注历史画像、电影配音演员与电视剧演员；单渠道出现的人物另一栏留空。
+    每个角色标注历史画像、电影角色形象、电影配音演员与电视剧演员；单渠道出现的人物另一栏留空。
   </p>
 
   <h2>人物</h2>
-  <p class="sub">左列为人物历史画像，右下列出电影/电视剧两渠道扮演者。照片为演员本人公开照。</p>
+  <p class="sub">左侧为历史画像与电影角色形象，右侧为电影/电视剧两渠道扮演者照片。照片为演员本人公开照。</p>
   <div class="cards">
 {cards_html}
   </div>
@@ -249,8 +276,7 @@ table.geo{{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
   </table>
 
   <p class="footnote">
-    历史画像来源：维基百科/维基共享资源（多为明清刻本画像）· 演员照片为演员本人公开照 · 地点为方位示意 ·
-    生僻字已注音 · 人物资料据豆瓣/百度百科
+    历史画像来源：维基百科/维基共享资源（多为明清刻本画像）· 电影角色形象与剧照来源：电影官方物料/媒体报道 · 演员照片为演员本人公开照 · 地点为方位示意 · 生僻字已注音 · 人物资料据豆瓣/百度百科
   </p>
 </div>
 </body>
@@ -262,8 +288,8 @@ print("index.html generated, size:", len(html))
 
 # 输出缺失图片提示
 missing = []
-for name, disp, note, mv, tv, hist in PEOPLE:
-    for who, folder, label in [(mv, "images/actors", "演员"), (tv, "images/actors", "演员"), (hist, "images/history", "画像")]:
+for name, disp, note, mv, tv, hist, mvchar in PEOPLE:
+    for who, folder, label in [(mv, "images/actors", "演员"), (tv, "images/actors", "演员"), (hist, "images/history", "画像"), (mvchar, "images/movie", "电影角色")]:
         if who and not img_path(folder, who):
             missing.append(f"{label}缺失: {who} ({name})")
 if missing:
