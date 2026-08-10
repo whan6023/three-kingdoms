@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三国 · 人物与地图（融合版）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:#fff;
+  color:#222;
+  line-height:1.7;
+}
+.wrap{max-width:980px;margin:0 auto;padding:32px 20px 56px;}
+
+h1{font-size:26px;font-weight:700;letter-spacing:0.04em;}
+.lead{font-size:13.5px;color:#555;margin:10px 0 4px;}
+.lead b{color:#222;}
+
+ruby rt{font-family:inherit;font-size:0.55em;color:#a0482e;}
+
+h2{
+  font-size:16px;
+  color:#a0482e;
+  border-bottom:2px solid #eee;
+  padding-bottom:5px;
+  margin:28px 0 12px;
+  letter-spacing:0.06em;
+}
+
+/* ---- 人物表 ---- */
+table.cast{width:100%;border-collapse:collapse;font-size:13px;}
+.cast th,.cast td{padding:8px 10px;text-align:left;border-bottom:1px solid #eee;vertical-align:top;}
+.cast th{font-size:11.5px;color:#a0482e;background:#fafafa;white-space:nowrap;}
+.cast td.name{font-weight:600;white-space:nowrap;}
+.cast td.name .py{display:block;font-weight:400;font-size:11px;color:#a0482e;}
+.cast td.chan{white-space:nowrap;}
+.cast td.chan .who{font-weight:600;color:#333;}
+.cast td.chan .note{font-size:11px;color:#999;display:block;}
+.cast td.dash{color:#ccc;text-align:center;}
+.cast tbody tr:nth-child(even){background:#fafafa;}
+.cast td.group{background:#f5f5f5;font-weight:700;color:#8a3a24;font-size:12.5px;letter-spacing:0.05em;}
+
+/* ---- 地图 ---- */
+.map-frame{border:1px solid #e8e8e8;border-radius:8px;background:#fafafa;padding:10px;}
+.map-frame svg{width:100%;height:auto;display:block;}
+.ml{font-family:inherit;fill:#333;}
+.ml.s{fill:#888;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#666;margin:8px 0;}
+.legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:-1px;}
+.legend .r{background:#c9a227;}
+.legend .b{background:#a8402e;}
+.legend .p{background:#4f8f7c;border-radius:2px;}
+
+table.geo{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
+.geo th,.geo td{padding:7px 9px;text-align:left;border-bottom:1px solid #eee;vertical-align:top;}
+.geo th{font-size:11.5px;color:#a0482e;background:#fafafa;white-space:nowrap;}
+.geo td.a{font-weight:600;white-space:nowrap;color:#8a3a24;}
+.geo td.m{white-space:nowrap;}
+.geo td.y{white-space:nowrap;color:#a0482e;}
+.geo tbody tr:nth-child(even){background:#fafafa;}
+
+.footnote{font-size:11.5px;color:#999;text-align:center;margin-top:28px;border-top:1px solid #eee;padding-top:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>三国 · 人物与地图</h1>
+  <p class="lead">
+    融合两部作品：<b>动画电影《三国的星空第一部》</b>（讨董→官渡，曹操视角）与
+    <b>电视剧《大军师司马懿》</b>（军师联盟 / 虎啸龙吟）。人物按"电影 / 电视剧"双渠道列出扮演者，
+    只在一个渠道出现的人物，另一栏留空。
+  </p>
+
+  <h2>人物 · 电影与电视剧扮演者对照</h2>
+  <div style="overflow-x:auto;">
+  <table class="cast">
+    <thead>
+      <tr><th>人物</th><th>电影《三国的星空》</th><th>电视剧《大军师司马懿》</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="3" class="group">核心人物（两个渠道都有）</td></tr>
+      <tr>
+        <td class="name"><ruby>曹操<rt>Cáo Cāo</rt></ruby><span class="py">字孟德</span></td>
+        <td class="chan"><span class="who">檀健次</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">于和伟</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>荀彧<rt>Xún Yù</rt></ruby><span class="py">字文若 · 彧 yù</span></td>
+        <td class="chan"><span class="who">囧森瑟夫</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">王劲松</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>夏侯惇<rt>Xiàhóu Dūn</rt></ruby><span class="py">字元让 · 惇 dūn</span></td>
+        <td class="chan"><span class="who">肖合来提·艾尼</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">杨涵斌</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">曹洪<span class="py">字子廉</span></td>
+        <td class="chan"><span class="who">巽辰</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">陈之辉</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>张郃<rt>Zhāng Hé</rt></ruby><span class="py">字儁乂 · 郃 hé</span></td>
+        <td class="chan"><span class="who">一舟</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">郭家诺</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">汉献帝 · 刘协<span class="py">Liú Xié</span></td>
+        <td class="chan"><span class="who">旺旺</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">王茂蕾</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">董承<span class="py">Dǒng Chéng</span></td>
+        <td class="chan"><span class="who">杨卫</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">赵彦民</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>许褚<rt>Xǔ Chǔ</rt></ruby><span class="py">字仲康 · 褚 chǔ</span></td>
+        <td class="chan"><span class="who">良生</span><span class="note">配音</span></td>
+        <td class="chan"><span class="who">李龙</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">郭嘉<span class="py">字奉孝</span></td>
+        <td class="chan"><span class="who">—</span></td>
+        <td class="chan"><span class="who">曹磊</span><span class="note">饰</span></td>
+      </tr>
+
+      <tr><td colspan="3" class="group">仅电影《三国的星空》出现</td></tr>
+      <tr>
+        <td class="name"><ruby>袁绍<rt>Yuán Shào</rt></ruby><span class="py">字本初</span></td>
+        <td class="chan"><span class="who">路金波</span><span class="note">配音</span></td>
+        <td class="chan dash">—</td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>许攸<rt>Xǔ Yōu</rt></ruby><span class="py">字子远 · 攸 yōu</span></td>
+        <td class="chan"><span class="who">任俊鹏</span><span class="note">配音</span></td>
+        <td class="chan dash">—</td>
+      </tr>
+      <tr>
+        <td class="name">麦子<span class="py">Mài zi · 曹操的狗</span></td>
+        <td class="chan"><span class="who">方浩然</span><span class="note">配音</span></td>
+        <td class="chan dash">—</td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>渠穆<rt>Qú Mù</rt></ruby><span class="py">渠 qú</span></td>
+        <td class="chan"><span class="who">沉寂</span><span class="note">配音</span></td>
+        <td class="chan dash">—</td>
+      </tr>
+      <tr>
+        <td class="name">师父<span class="py">Shīfu · 易中天客串</span></td>
+        <td class="chan"><span class="who">易中天</span><span class="note">配音</span></td>
+        <td class="chan dash">—</td>
+      </tr>
+      <tr>
+        <td class="name">童子<span class="py">Tóngzǐ</span></td>
+        <td class="chan"><span class="who">李潇宇</span><span class="note">配音</span></td>
+        <td class="chan dash">—</td>
+      </tr>
+
+      <tr><td colspan="3" class="group">仅电视剧《大军师司马懿》出现</td></tr>
+      <tr>
+        <td class="name"><ruby>司马懿<rt>Sīmǎ Yì</rt></ruby><span class="py">字仲达 · 懿 yì</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">吴秀波</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">张春华<span class="py">Zhāng Chūnhuá</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">刘涛</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">曹丕<span class="py">字子桓 · Cáo Pī</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">李晨</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>柏灵筠<rt>Bǎi Língyún</rt></ruby><span class="py">柏 bǎi</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">张钧甯</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">郭照<span class="py">Guō Zhào</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">唐艺昕</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">杨修<span class="py">字德祖</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">翟天临</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>甄宓<rt>Zhēn Fú</rt></ruby><span class="py">宓 fú</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">张芷溪</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">曹植<span class="py">字子建</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">王仁君</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>曹叡<rt>Cáo Ruì</rt></ruby><span class="py">叡 ruì</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">刘欢</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">诸葛亮<span class="py">字孔明</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">王洛勇</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">曹真<span class="py">字子丹</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">章贺</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">曹休<span class="py">字文烈</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">杜星奇</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name"><ruby>曹爽<rt>Cáo Shuǎng</rt></ruby><span class="py">字昭伯</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">杜奕衡</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">司马师<span class="py">字子元</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">肖顺尧</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">司马昭<span class="py">字子上</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">檀健次</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">司马孚<span class="py">字叔达</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">王东</span><span class="note">饰</span></td>
+      </tr>
+      <tr>
+        <td class="name">侯吉<span class="py">Hóu Jí · 虚构</span></td>
+        <td class="chan dash">—</td>
+        <td class="chan"><span class="who">来喜</span><span class="note">饰</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>地点舆图</h2>
+  <p class="lead" style="margin-bottom:8px;">方位示意，非精确测绘。黄线＝行军/北伐路线，红点＝战役地点，绿块＝势力中心。</p>
+  <div class="legend">
+    <span><span class="dot r"></span>行军/北伐路线</span>
+    <span><span class="dot b"></span>战役地点</span>
+    <span><span class="dot p"></span>势力中心</span>
+  </div>
+  <div class="map-frame">
+    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 90 240 C 180 215, 260 250, 380 230 C 450 215, 520 230, 640 205" fill="none" stroke="#6b8fae" stroke-width="2.5" opacity="0.35"></path>
+      <text x="100" y="232" class="ml s" font-size="12">黄河</text>
+      <path d="M 200 420 C 300 395, 400 430, 520 405 C 600 390, 660 400, 740 385" fill="none" stroke="#6b8fae" stroke-width="2.5" opacity="0.35"></path>
+      <text x="210" y="440" class="ml s" font-size="12">长江</text>
+      <path d="M 150 250 C 200 300, 240 330, 290 350" fill="none" stroke="#6b8fae" stroke-width="2" opacity="0.3" stroke-dasharray="4 4"></path>
+      <text x="210" y="320" class="ml s" font-size="11">秦岭</text>
+
+      <g transform="translate(748,44)" opacity="0.6">
+        <line x1="0" y1="14" x2="0" y2="-14" stroke="#c9a227" stroke-width="1.4"></line>
+        <path d="M0 -14 L -5 -4 L 5 -4 Z" fill="#c9a227"></path>
+        <text x="0" y="-20" text-anchor="middle" class="ml" font-size="12" font-weight="700">北</text>
+      </g>
+
+      <path d="M312 372 L262 282 L245 244 L152 258" fill="none" stroke="#c9a227" stroke-width="2" stroke-dasharray="7 6" opacity="0.85"></path>
+      <path d="M169.5 228.9 L346.8 207.6 L417.7 242.9" fill="none" stroke="#c9a227" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.5"></path>
+
+      <rect x="336.8" y="197.6" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="342.8" y="188" text-anchor="middle" class="ml" font-size="13.5" font-weight="700">洛阳</text>
+      <text x="342.8" y="230" text-anchor="middle" class="ml s" font-size="11">今洛阳市</text>
+
+      <rect x="407.7" y="232.9" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="413.7" y="223" text-anchor="middle" class="ml" font-size="13.5" font-weight="700">许都</text>
+      <text x="413.7" y="265" text-anchor="middle" class="ml s" font-size="11">今许昌</text>
+
+      <rect x="446.6" y="97.5" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="452.6" y="88" text-anchor="middle" class="ml" font-size="13.5" font-weight="700"><ruby>邺<rt>Yè</rt></ruby>城</text>
+      <text x="452.6" y="130" text-anchor="middle" class="ml s" font-size="11">今临漳</text>
+
+      <rect x="159.5" y="218.9" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="165.5" y="209" text-anchor="middle" class="ml" font-size="13.5" font-weight="700">长安</text>
+      <text x="165.5" y="251" text-anchor="middle" class="ml s" font-size="11">今西安</text>
+
+      <rect x="302" y="362" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="308" y="352" text-anchor="middle" class="ml" font-size="13.5" font-weight="700">汉中</text>
+      <text x="308" y="394" text-anchor="middle" class="ml s" font-size="11">蜀汉北伐基地</text>
+
+      <rect x="662.5" y="336.6" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="668.5" y="326" text-anchor="middle" class="ml" font-size="13.5" font-weight="700">江东</text>
+      <text x="668.5" y="368" text-anchor="middle" class="ml s" font-size="11">今南京一带</text>
+
+      <circle cx="423.7" cy="203.7" r="6.5" fill="#a8402e"></circle>
+      <text x="423.7" y="128" text-anchor="middle" class="ml" font-size="13" font-weight="700">官渡</text>
+      <text x="423.7" y="146" text-anchor="middle" class="ml s" font-size="11">今中牟东北</text>
+      <line x1="423.7" y1="150" x2="423.7" y2="197" stroke="#a8402e" stroke-width="1" opacity="0.5"></line>
+
+      <circle cx="435.5" cy="171.2" r="6.5" fill="#a8402e"></circle>
+      <text x="478" y="168" class="ml" font-size="13" font-weight="700">乌巢</text>
+      <text x="478" y="186" class="ml s" font-size="11">今延津东南</text>
+
+      <circle cx="393.8" cy="200.3" r="6.5" fill="#a8402e"></circle>
+      <text x="393.8" y="182" text-anchor="middle" class="ml" font-size="13" font-weight="700">虎牢关</text>
+
+      <circle cx="262" cy="282" r="6.5" fill="#a8402e"></circle>
+      <text x="262" y="264" text-anchor="middle" class="ml" font-size="13" font-weight="700"><ruby>祁<rt>Qí</rt></ruby>山</text>
+      <text x="262" y="306" text-anchor="middle" class="ml s" font-size="11">今甘肃礼县</text>
+
+      <circle cx="245" cy="244" r="6.5" fill="#a8402e"></circle>
+      <text x="245" y="226" text-anchor="middle" class="ml" font-size="13" font-weight="700">街亭</text>
+      <text x="245" y="268" text-anchor="middle" class="ml s" font-size="11">马谡失守</text>
+
+      <circle cx="152" cy="258" r="6.5" fill="#a8402e"></circle>
+      <text x="120" y="278" text-anchor="middle" class="ml" font-size="13" font-weight="700">五丈原</text>
+      <text x="120" y="296" text-anchor="middle" class="ml s" font-size="11">诸葛亮病逝</text>
+
+      <circle cx="178" cy="228" r="6.5" fill="#a8402e"></circle>
+      <text x="200" y="222" class="ml" font-size="13" font-weight="700">陈仓</text>
+      <text x="200" y="240" class="ml s" font-size="11">郝昭守城</text>
+
+      <circle cx="415.2" cy="483.7" r="6.5" fill="#a8402e"></circle>
+      <text x="415.2" y="505" text-anchor="middle" class="ml" font-size="13" font-weight="700">赤壁</text>
+      <text x="415.2" y="523" text-anchor="middle" class="ml s" font-size="11">今赤壁市</text>
+
+      <circle cx="313.4" cy="422.1" r="6.5" fill="#a8402e"></circle>
+      <text x="313.4" y="443" text-anchor="middle" class="ml" font-size="13" font-weight="700">长坂坡</text>
+      <text x="313.4" y="461" text-anchor="middle" class="ml s" font-size="11">今当阳</text>
+    </svg>
+  </div>
+
+  <h2>古今地点对照</h2>
+  <table class="geo">
+    <thead><tr><th>古地名</th><th>今地名</th><th>相关</th></tr></thead>
+    <tbody>
+      <tr><td class="a">许都（Xǔ Dū）</td><td class="m">河南许昌</td><td>曹操迎汉献帝定都，"挟天子以令诸侯"</td></tr>
+      <tr><td class="a">洛阳（Luò Yáng）</td><td class="m">河南洛阳</td><td>东汉旧都；曹丕称帝后的魏都</td></tr>
+      <tr><td class="a">邺城（Yè Chéng）</td><td class="m">河北临漳西南</td><td>曹操霸府，铜雀台所在</td></tr>
+      <tr><td class="a">长安（Cháng'ān）</td><td class="m">陕西西安</td><td>董卓西迁；关中重镇</td></tr>
+      <tr><td class="a">官渡（Guān Dù）</td><td class="m">河南中牟东北</td><td>官渡之战，曹操以少胜多</td></tr>
+      <tr><td class="a">乌巢（Wū Cháo）</td><td class="m">河南延津东南</td><td>夜袭火烧袁绍粮仓</td></tr>
+      <tr><td class="a">赤壁（Chì Bì）</td><td class="m">湖北赤壁</td><td>孙刘联军火攻大败曹操</td></tr>
+      <tr><td class="a">汉中（Hàn Zhōng）</td><td class="m">陕西汉中</td><td>蜀汉北伐大本营</td></tr>
+      <tr><td class="a">祁山（Qí Shān）</td><td class="m">甘肃礼县一带</td><td>诸葛亮六出祁山北伐</td></tr>
+      <tr><td class="a">街亭（Jiē Tíng）</td><td class="m">甘肃秦安东北</td><td>马谡失守，北伐失利</td></tr>
+      <tr><td class="a">五丈原（Wǔzhàng Yuán）</td><td class="m">陕西岐山南</td><td>诸葛亮病逝</td></tr>
+      <tr><td class="a">陈仓（Chén Cāng）</td><td class="m">陕西宝鸡</td><td>郝昭坚守不下</td></tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">人物据豆瓣/百度百科公开资料 · 地点为方位示意 · 生僻字均已注音</p>
+</div>
+</body>
+</html>

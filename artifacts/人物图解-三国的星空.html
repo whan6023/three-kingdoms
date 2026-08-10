@@ -1,0 +1,793 @@
+<!DOCTYPE html><html><head><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>三国的星空第一部 · 人物图解</title>
+<style>
+:root{
+  --ink-950:#0a0f1c;
+  --ink-900:#0f1830;
+  --ink-800:#182544;
+  --ink-700:#22315a;
+  --gold-500:#c9a227;
+  --gold-300:#e6c869;
+  --vermillion-500:#a8402e;
+  --jade-500:#4f8f7c;
+  --parchment-100:#f2e8d5;
+  --star:#f4f1e6;
+  --muted:#9aa4c4;
+}
+:root[data-theme="light"]{
+  --ink-950:#f7f2e4;
+  --ink-900:#efe7d2;
+  --ink-800:#e3d8ba;
+  --ink-700:#d2c49c;
+  --star:#241a0d;
+  --muted:#5a5140;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ink-950:#f7f2e4;
+    --ink-900:#efe7d2;
+    --ink-800:#e3d8ba;
+    --ink-700:#d2c49c;
+    --star:#241a0d;
+    --muted:#5a5140;
+  }
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse at 20% -10%, color-mix(in srgb, var(--gold-500) 14%, transparent), transparent 55%),
+    radial-gradient(ellipse at 90% 0%, color-mix(in srgb, var(--vermillion-500) 12%, transparent), transparent 50%),
+    var(--ink-950);
+  color:var(--star);
+  font-family:"Songti SC","Noto Serif SC","STSong",serif;
+  min-height:100vh;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:64px 32px 96px;}
+
+.hero{text-align:center;margin-bottom:12px;}
+.eyebrow{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:0.4em;
+  font-size:12px;
+  text-transform:uppercase;
+  color:var(--gold-300);
+  margin:0 0 18px;
+}
+h1{
+  font-size:clamp(40px,6vw,68px);
+  margin:0;
+  font-weight:700;
+  letter-spacing:0.06em;
+  text-wrap:balance;
+  background:linear-gradient(180deg,var(--star) 30%,var(--gold-300));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.subtitle{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:15px;
+  color:var(--muted);
+  max-width:560px;
+  margin:20px auto 0;
+  line-height:1.75;
+}
+
+.divider{
+  display:flex;align-items:center;gap:14px;
+  max-width:420px;margin:44px auto 56px;
+  color:var(--gold-500);
+}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-500),transparent);}
+.divider span{font-size:12px;font-family:ui-sans-serif,system-ui,sans-serif;letter-spacing:0.3em;white-space:nowrap;}
+
+.constellation{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  margin-bottom:56px;
+}
+.link-row{
+  grid-column:1/-1;
+  height:1px;
+  position:relative;
+  margin:-14px 0;
+}
+.link-row svg{width:100%;height:40px;display:block;overflow:visible;}
+
+.card{
+  position:relative;
+  background:linear-gradient(160deg, color-mix(in srgb, var(--ink-800) 88%, transparent), color-mix(in srgb, var(--ink-900) 92%, transparent));
+  border:1px solid color-mix(in srgb, var(--gold-500) 30%, var(--ink-700));
+  border-radius:6px;
+  padding:28px 24px 26px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.card::before{
+  content:"";
+  position:absolute;inset:6px;
+  border:1px solid color-mix(in srgb, var(--gold-500) 18%, transparent);
+  border-radius:3px;
+  pointer-events:none;
+}
+
+.portrait{
+  width:96px;height:96px;
+  margin:4px auto 0;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.portrait svg{width:100%;height:100%;}
+.portrait-ring{
+  position:absolute;inset:-6px;
+  border-radius:50%;
+  border:1px solid var(--gold-500);
+  opacity:0.55;
+}
+
+.name-block{text-align:center;}
+.cn-name{font-size:26px;font-weight:700;letter-spacing:0.08em;margin:0;}
+.pinyin{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:13px;color:var(--gold-300);
+  letter-spacing:0.03em;
+  margin:4px 0 0;
+}
+.pinyin em{
+  font-style:normal;color:var(--vermillion-500);font-weight:600;
+}
+.role-tag{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--vermillion-500);
+  margin-top:6px;
+}
+.va{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:12px;color:var(--muted);margin-top:4px;
+}
+
+.section-label{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--gold-300);
+  border-bottom:1px solid color-mix(in srgb, var(--gold-500) 25%, transparent);
+  padding-bottom:6px;
+  margin:0;
+}
+.highlights{
+  margin:0;padding:0;list-style:none;
+  font-size:14px;line-height:1.75;
+  display:flex;flex-direction:column;gap:6px;
+}
+.highlights li{padding-left:14px;position:relative;}
+.highlights li::before{content:"—";position:absolute;left:0;color:var(--gold-500);}
+
+.vernacular{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:13.5px;line-height:1.7;
+  color:var(--star);
+  background:color-mix(in srgb, var(--ink-700) 55%, transparent);
+  border-left:2px solid var(--vermillion-500);
+  padding:10px 14px;
+  border-radius:0 4px 4px 0;
+}
+.vernacular b{color:var(--gold-300);font-weight:600;}
+
+.footnote{
+  max-width:720px;margin:0 auto;
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:12.5px;line-height:1.8;
+  color:var(--muted);
+  text-align:center;
+  border-top:1px solid color-mix(in srgb, var(--gold-500) 20%, transparent);
+  padding-top:24px;
+}
+.footnote a{color:var(--gold-300);}
+
+@media (max-width:820px){
+  .constellation{grid-template-columns:1fr;}
+  .link-row{display:none;}
+}
+
+.mini-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+  gap:18px;
+  margin-bottom:56px;
+}
+.mini-card{
+  position:relative;
+  background:linear-gradient(160deg, color-mix(in srgb, var(--ink-800) 78%, transparent), color-mix(in srgb, var(--ink-900) 85%, transparent));
+  border:1px solid color-mix(in srgb, var(--gold-500) 22%, var(--ink-700));
+  border-radius:5px;
+  padding:18px 18px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.mini-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.mini-name{font-size:19px;font-weight:700;letter-spacing:0.04em;margin:0;}
+.mini-pinyin{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:11.5px;color:var(--gold-300);
+  margin:2px 0 0;
+}
+.mini-pinyin em{font-style:normal;color:var(--vermillion-500);font-weight:600;}
+.mini-va{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:11px;color:var(--muted);white-space:nowrap;
+}
+.mini-tag{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--vermillion-500);
+  margin:-4px 0 0;
+}
+.mini-body{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:13px;line-height:1.7;color:var(--star);
+  margin:0;
+}
+.mini-vern{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:12.5px;line-height:1.65;
+  color:var(--muted);
+  border-top:1px solid color-mix(in srgb, var(--gold-500) 16%, transparent);
+  padding-top:8px;
+  margin:0;
+}
+.mini-vern b{color:var(--gold-300);font-weight:600;}
+
+.compare-intro{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:14px;line-height:1.8;color:var(--muted);
+  max-width:760px;margin:0 auto 32px;text-align:center;
+}
+.compare-intro b{color:var(--star);font-weight:600;}
+
+.film-legend{
+  display:flex;justify-content:center;gap:28px;
+  margin-bottom:28px;flex-wrap:wrap;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:13px;
+}
+.film-legend .chip{display:flex;align-items:center;gap:8px;}
+.film-legend .swatch{width:12px;height:12px;border-radius:3px;display:inline-block;}
+.swatch.a{background:var(--gold-500);}
+.swatch.b{background:var(--vermillion-500);}
+
+.table-scroll{overflow-x:auto;margin-bottom:24px;border:1px solid color-mix(in srgb, var(--gold-500) 25%, var(--ink-700));border-radius:6px;}
+table.timeline{
+  width:100%;border-collapse:collapse;
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:13.5px;
+  min-width:720px;
+}
+table.timeline caption{
+  text-align:left;padding:14px 16px 0;
+  font-size:12px;color:var(--muted);
+}
+table.timeline th, table.timeline td{
+  padding:12px 16px;
+  text-align:left;
+  border-bottom:1px solid color-mix(in srgb, var(--gold-500) 14%, transparent);
+  vertical-align:top;
+}
+table.timeline thead th{
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--gold-300);
+  background:color-mix(in srgb, var(--ink-700) 45%, transparent);
+  white-space:nowrap;
+}
+table.timeline td.year{
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;color:var(--gold-300);font-weight:600;
+}
+table.timeline td.event{color:var(--star);}
+table.timeline td.mark{text-align:center;font-size:16px;white-space:nowrap;}
+table.timeline td.mark.yes-a{color:var(--gold-500);}
+table.timeline td.mark.yes-b{color:var(--vermillion-500);}
+table.timeline td.mark.no{color:var(--muted);opacity:0.4;}
+table.timeline tbody tr:last-child td{border-bottom:none;}
+table.timeline tbody tr:nth-child(even){background:color-mix(in srgb, var(--ink-800) 35%, transparent);}
+
+.map-frame{
+  position:relative;
+  border:1px solid color-mix(in srgb, var(--gold-500) 30%, var(--ink-700));
+  border-radius:6px;
+  background:linear-gradient(160deg, color-mix(in srgb, var(--ink-800) 70%, transparent), color-mix(in srgb, var(--ink-900) 88%, transparent));
+  padding:12px;
+  margin-bottom:20px;
+}
+.map-frame svg{width:100%;height:auto;display:block;}
+.map-label{
+  font-family:ui-sans-serif,system-ui,sans-serif;
+  fill:var(--star);
+}
+.map-label.small{fill:var(--muted);}
+.map-legend{
+  display:flex;flex-wrap:wrap;gap:20px;justify-content:center;
+  margin-bottom:32px;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:12.5px;
+  color:var(--muted);
+}
+.map-legend .chip{display:flex;align-items:center;gap:7px;}
+.map-legend .dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
+.map-legend .dot.route{background:var(--gold-500);}
+.map-legend .dot.battle{background:var(--vermillion-500);}
+.map-legend .dot.power{background:var(--jade-500);border-radius:2px;}
+
+table.geo th, table.geo td{padding:11px 14px;}
+table.geo td.ancient{color:var(--gold-300);font-weight:600;white-space:nowrap;}
+table.geo td.modern{color:var(--star);white-space:nowrap;}
+</style>
+
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">动画电影 · 2025.10.01 上映</p>
+    <h1>三国的星空第一部</h1>
+    <p class="subtitle">
+      易中天监制编剧，于孟、袁原执导。故事舍弃了刘关张、董卓吕布的传统班底，
+      改以曹操、袁绍、汉献帝刘协三人为核心 —— 易中天称之为"三体"结构，
+      聚焦讨董到官渡之战这段"发小反目、君臣猜忌"的历史。下方按官方公布的
+      配音演员表，收录全部 17 个角色（含少年版与原创角色）。
+    </p>
+  </div>
+
+  <div class="divider"><span>核心人物 · 三体</span></div>
+
+  <div class="constellation">
+    <!-- 曹操 -->
+    <div class="card">
+      <div class="portrait">
+        <div class="portrait-ring"></div>
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.4"></circle>
+          <path d="M50 20 C30 20 24 40 26 55 C27 68 38 80 50 80 C62 80 73 68 74 55 C76 40 70 20 50 20 Z" fill="#22315a" stroke="#c9a227" stroke-width="1.2"></path>
+          <path d="M32 42 Q50 30 68 42" stroke="#c9a227" stroke-width="2" fill="none" stroke-linecap="round"></path>
+          <circle cx="42" cy="52" r="2.4" fill="#e6c869"></circle><circle cx="58" cy="52" r="2.4" fill="#e6c869"></circle>
+          <path d="M40 66 Q50 72 60 66" stroke="#a8402e" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div class="name-block">
+        <p class="cn-name">曹操</p>
+        <p class="pinyin">姓曹名操，字孟德 · Cáo Cāo</p>
+        <p class="role-tag">主角 · 檀健次 配音</p>
+      </div>
+      <p class="section-label">历史高光</p>
+      <ul class="highlights">
+        <li>190年参与讨伐董卓联军</li>
+        <li>"挟天子以令诸侯"，奉汉献帝迁都许昌</li>
+        <li>200年官渡之战，以两万破十万，击溃袁绍</li>
+        <li>统一中国北方，奠定曹魏政权基础</li>
+      </ul>
+      <p class="vernacular"><b>大白话：</b>草根出身却是当时最能打的"创业者"，
+      靠挟持董事长（皇帝）拿到公司控制权，又在资源劣势下逆风翻盘干掉最大竞争对手，
+      从此坐稳华北一哥。</p>
+    </div>
+
+    <!-- 袁绍 -->
+    <div class="card">
+      <div class="portrait">
+        <div class="portrait-ring"></div>
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.4"></circle>
+          <path d="M50 18 C28 18 22 38 25 54 C26 68 37 82 50 82 C63 82 74 68 75 54 C78 38 72 18 50 18 Z" fill="#22315a" stroke="#c9a227" stroke-width="1.2"></path>
+          <path d="M30 38 Q50 24 70 38" stroke="#c9a227" stroke-width="2" fill="none" stroke-linecap="round"></path>
+          <circle cx="42" cy="53" r="2.4" fill="#e6c869"></circle><circle cx="58" cy="53" r="2.4" fill="#e6c869"></circle>
+          <path d="M38 67 Q50 64 62 67" stroke="#a8402e" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div class="name-block">
+        <p class="cn-name">袁绍</p>
+        <p class="pinyin">姓袁名绍，字本初 · Yuán Shào</p>
+        <p class="role-tag">曹操少年挚友 · 路金波 配音</p>
+      </div>
+      <p class="section-label">历史高光</p>
+      <ul class="highlights">
+        <li>出身"四世三公"的顶级门阀袁氏</li>
+        <li>讨董联军盟主，一度声望最盛的诸侯</li>
+        <li>吞并冀、青、幽、并四州，坐拥河北</li>
+        <li>官渡之战决策迟疑、粮草被烧，兵败元气大伤</li>
+      </ul>
+      <p class="vernacular"><b>大白话：</b>妥妥的"富二代顶配"，含着金汤匙出身、
+      朋友圈资源最硬，一度是行业里公认的老大；但决策拖沓、内部山头林立，
+      被曾经的发小曹操在关键一役里反超出局。</p>
+    </div>
+
+    <!-- 汉献帝 -->
+    <div class="card">
+      <div class="portrait">
+        <div class="portrait-ring"></div>
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="#c9a227" stroke-width="1" opacity="0.4"></circle>
+          <path d="M50 19 C29 19 23 39 26 55 C27 69 38 81 50 81 C62 81 73 69 74 55 C77 39 71 19 50 19 Z" fill="#22315a" stroke="#c9a227" stroke-width="1.2"></path>
+          <path d="M31 40 Q50 27 69 40" stroke="#c9a227" stroke-width="2" fill="none" stroke-linecap="round"></path>
+          <rect x="38" y="17" width="24" height="7" rx="1.5" fill="#c9a227"></rect>
+          <circle cx="42" cy="53" r="2.4" fill="#e6c869"></circle><circle cx="58" cy="53" r="2.4" fill="#e6c869"></circle>
+          <path d="M40 66 Q50 70 60 66" stroke="#a8402e" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div class="name-block">
+        <p class="cn-name">汉献帝 · 刘协</p>
+        <p class="pinyin">姓刘名协，庙谥汉孝献皇帝 · Liú Xié</p>
+        <p class="role-tag">末代天子 · 旺旺 配音</p>
+      </div>
+      <p class="section-label">历史高光</p>
+      <ul class="highlights">
+        <li>9岁被董卓拥立为帝，东汉最后一位皇帝</li>
+        <li>长期被军阀挟持，辗转迁都、颠沛流离</li>
+        <li>196年被曹操迎至许昌，形式上重掌朝廷</li>
+        <li>220年禅位于曹丕，东汉正式终结</li>
+      </ul>
+      <p class="vernacular"><b>大白话：</b>史书里常被写成窝囊摆设的"傀儡董事长"，
+      这部电影想翻案：他其实一直在夹缝里搞平衡、找存在感，
+      是个懂生存智慧、不甘心只当橡皮图章的末代掌门人。</p>
+    </div>
+  </div>
+
+  <div class="divider"><span>官渡阵营 · 历史人物</span></div>
+
+  <div class="mini-grid">
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">许攸</p><p class="mini-va">任俊鹏 配音</p></div>
+      <p class="mini-pinyin">姓许名攸，字子远 · Xǔ <em>Yōu</em>（攸 yōu，生僻）</p>
+      <p class="mini-tag">袁绍谋士 → 倒戈曹营</p>
+      <p class="mini-body">官渡之战中因家人犯法被袁绍冷落，愤而投奔曹操，献计夜袭乌巢烧粮，是曹操以弱胜强的关键一手；后因居功自傲，被许褚所杀。</p>
+      <p class="mini-vern"><b>大白话：</b>带着老东家核心机密跳槽的"关键先生"，帮新公司翻盘上位，却因为嘴欠、倚老卖老被同事做掉。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">董承</p><p class="mini-va">杨卫 配音</p></div>
+      <p class="mini-pinyin">姓董名承 · Dǒng Chéng</p>
+      <p class="mini-tag">国舅 · 反曹密谋者</p>
+      <p class="mini-body">汉献帝的岳丈，车骑将军，暗中受"衣带诏"联络刘备等人图谋铲除曹操，199年事情败露被曹操诛杀。</p>
+      <p class="mini-vern"><b>大白话：</b>董事长的老丈人，偷偷拉群搞"倒某"行动，结果内部消息走漏，被总裁连锅端。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">许褚</p><p class="mini-va">良生 配音</p></div>
+      <p class="mini-pinyin">姓许名褚，字仲康 · Xǔ <em>Chǔ</em>（褚 chǔ，易误读为 zhǔ）</p>
+      <p class="mini-tag">曹操贴身猛将 · 虎痴</p>
+      <p class="mini-body">力大超群，长期担任曹操的贴身护卫，随军征战屡建战功，是曹魏阵营最可靠的近身武将之一。</p>
+      <p class="mini-vern"><b>大白话：</b>老板的"首席安保"，四肢发达、忠诚度拉满，谁威胁到老板先过他这关。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">荀彧</p><p class="mini-va">囧森瑟夫 配音</p></div>
+      <p class="mini-pinyin">姓荀名彧，字文若 · Xún <em>Yù</em>（彧 yù，生僻，非"或"huò）</p>
+      <p class="mini-tag">曹操首席谋士 · 王佐之才</p>
+      <p class="mini-body">为曹操主持后方、举荐郭嘉等大量人才，是曹操集团早期崛起的核心大脑；后因反对曹操称魏公，逐渐被疏远，最终郁郁而终。</p>
+      <p class="mini-vern"><b>大白话：</b>公司草创期的"总参谋长"兼HRD，帮忙搭班子、挖人才；但价值观分歧到最后被边缘化，黯然退场。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">张郃</p><p class="mini-va">一舟 配音</p></div>
+      <p class="mini-pinyin">姓张名郃，字儁乂 · Zhāng <em>Hé</em>（郃 hé，生僻，非"合"）</p>
+      <p class="mini-tag">袁绍部将 → 曹魏名将</p>
+      <p class="mini-body">原为袁绍麾下大将，官渡之战后期见势不妙率部投降曹操，此后成为曹魏"五子良将"之一。</p>
+      <p class="mini-vern"><b>大白话：</b>河北公司的技术骨干，眼看老东家要黄了果断跳槽，后来成了新公司的顶梁柱。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">夏侯惇</p><p class="mini-va">肖合来提·艾尼 配音</p></div>
+      <p class="mini-pinyin">复姓夏侯，名惇，字元让 · Xiàhóu <em>Dūn</em>（惇 dūn，生僻）</p>
+      <p class="mini-tag">曹操族亲 · 独眼上将</p>
+      <p class="mini-body">曹操的宗族兄弟，随曹操起兵以来的头号将领之一，作战中曾伤及一目，仍长期镇守要地、统领兵马。</p>
+      <p class="mini-vern"><b>大白话：</b>曹老板的发小兼创业合伙人，班底里最能打的那个自己人。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">曹洪</p><p class="mini-va">巽辰 配音</p></div>
+      <p class="mini-pinyin">姓曹名洪，字子廉 · Cáo Hóng</p>
+      <p class="mini-tag">曹操堂弟 · 曹魏宗室将领</p>
+      <p class="mini-body">曹操堂弟，早年起兵时曾在危难中让出自己的战马助曹操脱险，留下"天下可无洪，不可无君"的典故，此后长期领兵征战。</p>
+      <p class="mini-vern"><b>大白话：</b>曹家自己人里最讲义气的那位，老板出车祸直接把车让出来。</p>
+    </div>
+  </div>
+
+  <div class="divider"><span>电影原创 · 非史书人物</span></div>
+
+  <div class="mini-grid">
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">麦子</p><p class="mini-va">方浩然 配音</p></div>
+      <p class="mini-pinyin">Mài zi（虚构，非人物姓名，无姓）</p>
+      <p class="mini-tag">曹操的狗 · 原创角色</p>
+      <p class="mini-body">主创为曹操专门设计的原创角色，一只始终陪伴他的狗，让曹操在乱世中有个能"说话"的对象；影片结尾麦子用尽最后力气把饼叼给曹操，是全片重要的催泪点。</p>
+      <p class="mini-vern"><b>大白话：</b>历史上不存在，是编剧组给主角加的"情感树洞"担当，专门负责煽情。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">渠穆</p><p class="mini-va">沉寂 配音</p></div>
+      <p class="mini-pinyin">姓渠名穆 · Qú Mù（渠 qú，较少见姓氏）</p>
+      <p class="mini-tag">官渡之战相关角色</p>
+      <p class="mini-body">出现在官渡之战剧情线中的人物，公开资料对其具体设定披露较少，推测为剧情推进用的阵营角色。</p>
+      <p class="mini-vern"><b>大白话：</b>戏份型配角，负责在关键战役场景里搭话推进剧情，具体来历存疑，欢迎看片后补充。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">师父</p><p class="mini-va">易中天 配音</p></div>
+      <p class="mini-pinyin">Shīfu（称谓，非姓名）</p>
+      <p class="mini-tag">监制/编剧客串角色</p>
+      <p class="mini-body">由本片监制兼编剧易中天亲自配音的角色，具体身份与剧情设定相关，非明确对应某位史书人物，功能上更像是引路人/说书人式存在。</p>
+      <p class="mini-vern"><b>大白话：</b>编剧本人客串了个"人生导师"式的角色，站在旁边给主角点拨两句。</p>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name">童子</p><p class="mini-va">李潇宇 配音</p></div>
+      <p class="mini-pinyin">Tóngzǐ（称谓，非姓名）</p>
+      <p class="mini-tag">辅助角色</p>
+      <p class="mini-body">影片中与"师父"配套出现的角色，公开资料中信息有限，功能上偏向剧情辅助。</p>
+      <p class="mini-vern"><b>大白话：</b>打酱油的辅助角色，负责跑腿和补充剧情细节。</p>
+    </div>
+  </div>
+
+  <div class="divider"><span>两部"曹操电影"的时间线</span></div>
+
+  <p class="compare-intro">
+    巧的是，最近有两部动画电影都在讲曹操的青年往事：
+    <b>易中天监制《三国的星空第一部》</b>（2025.10.01 上映）与
+    <b>追光动画《三国第一部：争洛阳》</b>（2026.07.10 上映，谢君伟执导、王微编剧）。
+    两者其实讲的是"前后两段"故事——《争洛阳》从黄巾之乱、十常侍乱政讲到董卓入京、虎牢关讨董；
+    《星空第一部》则从讨董联军讲起，一路推进到官渡之战。两片唯一正面重叠的历史事件就是"讨伐董卓"。
+  </p>
+
+  <div class="film-legend">
+    <span class="chip"><span class="swatch a"></span>《三国第一部：争洛阳》· 追光动画 · 2026.07.10</span>
+    <span class="chip"><span class="swatch b"></span>《三国的星空第一部》· 易中天监制 · 2025.10.01</span>
+  </div>
+
+  <div class="table-scroll">
+    <table class="timeline">
+      <caption>● 争洛阳（金色）　● 星空第一部（朱红）　— 均按真实历史纪年排列，非电影上映顺序</caption>
+      <thead>
+        <tr>
+          <th>年代</th>
+          <th>真实历史事件</th>
+          <th>争洛阳</th>
+          <th>星空第一部</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="year">184年</td>
+          <td class="event">黄巾之乱爆发，曹操以骑都尉身份领兵平乱立功</td>
+          <td class="mark yes-a">●</td>
+          <td class="mark no">—</td>
+        </tr>
+        <tr>
+          <td class="year">189年</td>
+          <td class="event">汉灵帝驾崩，刘辩继位，何进以大将军身份秉政</td>
+          <td class="mark yes-a">●</td>
+          <td class="mark no">—</td>
+        </tr>
+        <tr>
+          <td class="year">189年</td>
+          <td class="event">何进谋诛宦官、召董卓入京，事泄反被十常侍所杀</td>
+          <td class="mark yes-a">●</td>
+          <td class="mark no">—</td>
+        </tr>
+        <tr>
+          <td class="year">189年</td>
+          <td class="event">袁绍等率兵尽诛宦官（"屠宦"），何进旧部与董卓相继入京</td>
+          <td class="mark yes-a">●</td>
+          <td class="mark no">—</td>
+        </tr>
+        <tr>
+          <td class="year">189年</td>
+          <td class="event">董卓废少帝刘辩，改立陈留王刘协为帝（即汉献帝）</td>
+          <td class="mark yes-a">●</td>
+          <td class="mark no">—</td>
+        </tr>
+        <tr>
+          <td class="year">190年</td>
+          <td class="event">关东诸侯起兵讨董，推袁绍为盟主；虎牢关前联军与吕布交战</td>
+          <td class="mark yes-a">●</td>
+          <td class="mark yes-b">●</td>
+        </tr>
+        <tr>
+          <td class="year">190年</td>
+          <td class="event">董卓焚毁洛阳、挟献帝西迁长安；联军内部分化（吕布弑丁原投董、孙坚匿玉玺等）</td>
+          <td class="mark yes-a">●</td>
+          <td class="mark no">—</td>
+        </tr>
+        <tr>
+          <td class="year">191–195年</td>
+          <td class="event">讨董联军解体，各路诸侯转向割据混战，曹操逐步壮大兖州根据地</td>
+          <td class="mark no">—</td>
+          <td class="mark yes-b">●</td>
+        </tr>
+        <tr>
+          <td class="year">196年</td>
+          <td class="event">曹操迎汉献帝迁都许昌，"挟天子以令诸侯"</td>
+          <td class="mark no">—</td>
+          <td class="mark yes-b">●</td>
+        </tr>
+        <tr>
+          <td class="year">199年</td>
+          <td class="event">董承等奉"衣带诏"密谋诛曹，事泄被杀</td>
+          <td class="mark no">—</td>
+          <td class="mark yes-b">●</td>
+        </tr>
+        <tr>
+          <td class="year">200年</td>
+          <td class="event">官渡之战，曹操以少胜多，大败袁绍，奠定统一北方基础</td>
+          <td class="mark no">—</td>
+          <td class="mark yes-b">●</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="compare-intro" style="margin-bottom:56px;">
+    简单说：<b>《争洛阳》是"前传"</b>——讲曹操、袁绍从少年挚友到各自站队的起点（184–190年）；
+    <b>《星空第一部》接着往下讲</b>——从讨董的同一历史节点切入，一路演到190年后到200年两人反目的官渡决战。
+    两部片子把曹操从"平乱新秀"到"北方霸主"的完整前半生，正好拼成了一条连续的时间线。
+  </p>
+
+  <div class="divider"><span>戏说 vs 正史 · 两片的艺术加工</span></div>
+
+  <p class="compare-intro">
+    两部片子都打着"贴近正史"的旗号，但为了戏剧效果都动了手脚。以下是目前公开影评/考据里提到的主要出入，
+    标注仅供参考，具体请以正片与《三国志》《后汉书》原文为准。
+  </p>
+
+  <div class="mini-grid" style="grid-template-columns:repeat(auto-fit, minmax(320px,1fr));">
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name" style="font-size:16px;">《三国的星空第一部》</p></div>
+      <ul class="highlights" style="font-size:13px;">
+        <li><b>曹操"洗白"：</b>片中曹操满腔热血、重情重义、一心兴复汉室，弱化了正史中猜忌多疑、杀伐果决的枭雄一面，被观众调侃像"动漫男主""文天祥穿越"。</li>
+        <li><b>刘协"逆袭"：</b>官渡之战高潮设定刘协亲自押粮赴曹营、与曹操并肩御敌，正史并无此记载；编剧易中天本人也承认这一人设"不符合历史真实"，属艺术加工。</li>
+        <li><b>时间线压缩：</b>把190年讨董到200年官渡长达十余年的复杂群雄博弈，简化聚焦为曹操、袁绍二人的私人恩怨与和解叙事。</li>
+      </ul>
+    </div>
+
+    <div class="mini-card">
+      <div class="mini-head"><p class="mini-name" style="font-size:16px;">《三国第一部：争洛阳》</p></div>
+      <ul class="highlights" style="font-size:13px;">
+        <li><b>檄文张冠李戴：</b>片中讨董檄文被归功于曹操振臂一呼，但正史记载檄文实际出自东郡太守桥瑁之手；彼时曹操人微言轻，尚无号召群雄的声望与实力。</li>
+        <li><b>袁氏身份有误：</b>片中袁绍称袁术为袁家"嫡长子"，但据记载袁氏真正的嫡长子是袁基，袁术实为庶出。</li>
+        <li><b>玉玺情节存疑：</b>孙坚在洛阳发现传国玉玺一事，裴松之注三国志时已对其真实性提出质疑，属于史学界长期存疑的传说，影片按实事处理。</li>
+        <li><b>事件跨度压缩：</b>黄巾之乱到虎牢关讨董横跨约5-6年，片中被整合进同一条紧凑主线，人物际遇有戏剧化处理。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"><span>历史地理 · 古今地点对照</span></div>
+
+  <p class="compare-intro">
+    下面这张示意图（按经纬度粗略换算的方位图，非精确地理测绘）标出了曹操故事里反复出现的几个地点，
+    可以看出汉献帝"长安→洛阳→许昌"这条逃亡/迁都路线，以及官渡、赤壁两场决战在地理上离得有多远。
+  </p>
+
+  <div class="map-legend">
+    <span class="chip"><span class="dot route"></span>皇帝迁徙路线</span>
+    <span class="chip"><span class="dot battle"></span>战役/事件地点</span>
+    <span class="chip"><span class="dot power"></span>势力中心</span>
+  </div>
+
+  <div class="map-frame">
+    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- decorative rivers -->
+      <path d="M 120 260 C 220 230, 300 260, 380 230 C 450 205, 520 220, 620 200" fill="none" stroke="#6b8fae" stroke-width="2.5" opacity="0.35"></path>
+      <text x="130" y="252" class="map-label small" font-size="12">黄河</text>
+      <path d="M 260 470 C 340 440, 400 470, 470 460 C 560 448, 640 420, 720 400" fill="none" stroke="#6b8fae" stroke-width="2.5" opacity="0.35"></path>
+      <text x="270" y="490" class="map-label small" font-size="12">长江</text>
+
+      <!-- compass -->
+      <g transform="translate(748,44)" opacity="0.7">
+        <line x1="0" y1="14" x2="0" y2="-14" stroke="#c9a227" stroke-width="1.4"></line>
+        <path d="M0 -14 L -5 -4 L 5 -4 Z" fill="#c9a227"></path>
+        <text x="0" y="-20" text-anchor="middle" class="map-label" font-size="12" font-weight="700">北</text>
+      </g>
+
+      <!-- emperor route: 长安(169.5,228.9) -> 洛阳(346.8,207.6) -> 许昌(417.7,242.9) -->
+      <path d="M169.5 228.9 L346.8 207.6 L417.7 242.9" fill="none" stroke="#c9a227" stroke-width="2" stroke-dasharray="7 6" opacity="0.85"></path>
+
+      <!-- 长安 -->
+      <circle cx="169.5" cy="228.9" r="7" fill="#c9a227"></circle>
+      <text x="169.5" y="209" text-anchor="middle" class="map-label" font-size="15" font-weight="700">① 长安</text>
+      <text x="169.5" y="253" text-anchor="middle" class="map-label small" font-size="11.5">今西安市</text>
+
+      <!-- 洛阳 -->
+      <circle cx="346.8" cy="207.6" r="7" fill="#c9a227"></circle>
+      <text x="346.8" y="187.6" text-anchor="middle" class="map-label" font-size="15" font-weight="700">② 洛阳</text>
+      <text x="346.8" y="231.6" text-anchor="middle" class="map-label small" font-size="11.5">今洛阳市</text>
+
+      <!-- 许昌 -->
+      <circle cx="417.7" cy="242.9" r="7" fill="#c9a227"></circle>
+      <text x="417.7" y="266.9" text-anchor="middle" class="map-label" font-size="15" font-weight="700">③ 许昌（许都）</text>
+      <text x="417.7" y="285" text-anchor="middle" class="map-label small" font-size="11.5">今许昌市</text>
+
+      <!-- 虎牢关 -->
+      <circle cx="393.8" cy="200.3" r="6.5" fill="#a8402e"></circle>
+      <text x="393.8" y="182" text-anchor="middle" class="map-label" font-size="13.5" font-weight="700">虎牢关</text>
+      <text x="440" y="200" class="map-label small" font-size="11">今荥阳汜水镇</text>
+
+      <!-- 官渡 -->
+      <circle cx="423.7" cy="203.7" r="6.5" fill="#a8402e"></circle>
+      <text x="423.7" y="128" text-anchor="middle" class="map-label" font-size="13.5" font-weight="700">官渡</text>
+      <text x="423.7" y="146" text-anchor="middle" class="map-label small" font-size="11">今中牟县东北</text>
+      <line x1="423.7" y1="150" x2="423.7" y2="197" stroke="#a8402e" stroke-width="1" opacity="0.5"></line>
+
+      <!-- 乌巢 -->
+      <circle cx="435.5" cy="171.2" r="6.5" fill="#a8402e"></circle>
+      <text x="480" y="168" class="map-label" font-size="13.5" font-weight="700">乌巢</text>
+      <text x="480" y="186" class="map-label small" font-size="11">今延津县东南</text>
+
+      <!-- 宛城 -->
+      <circle cx="350.8" cy="300.6" r="6.5" fill="#a8402e"></circle>
+      <text x="350.8" y="322" text-anchor="middle" class="map-label" font-size="13.5" font-weight="700">宛城</text>
+      <text x="350.8" y="340" text-anchor="middle" class="map-label small" font-size="11">今南阳市</text>
+
+      <!-- 邺城 -->
+      <rect x="450.6" y="107.5" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="456.6" y="98" text-anchor="middle" class="map-label" font-size="13.5" font-weight="700">邺城</text>
+      <text x="456.6" y="140" text-anchor="middle" class="map-label small" font-size="11">今临漳县西南</text>
+
+      <!-- 赤壁 -->
+      <circle cx="415.2" cy="483.7" r="6.5" fill="#a8402e"></circle>
+      <text x="415.2" y="505" text-anchor="middle" class="map-label" font-size="13.5" font-weight="700">赤壁</text>
+      <text x="415.2" y="523" text-anchor="middle" class="map-label small" font-size="11">今赤壁市</text>
+
+      <!-- 长坂坡 -->
+      <circle cx="313.4" cy="422.1" r="6.5" fill="#a8402e"></circle>
+      <text x="313.4" y="443" text-anchor="middle" class="map-label" font-size="13.5" font-weight="700">长坂坡</text>
+      <text x="313.4" y="461" text-anchor="middle" class="map-label small" font-size="11">今当阳市</text>
+
+      <!-- 江东/建业 -->
+      <rect x="662.5" y="346.6" width="12" height="12" fill="#4f8f7c"></rect>
+      <text x="668.5" y="336" text-anchor="middle" class="map-label" font-size="13.5" font-weight="700">江东（建业）</text>
+      <text x="668.5" y="378" text-anchor="middle" class="map-label small" font-size="11">今南京市一带</text>
+    </svg>
+  </div>
+
+  <div class="table-scroll">
+    <table class="timeline geo">
+      <thead>
+        <tr><th>古地名</th><th>今地名（大致范围）</th><th>相关事件</th><th>年份</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="ancient">长安</td><td class="modern">今陕西西安市</td><td class="event">董卓挟汉献帝西迁；后李傕、郭汜之乱</td><td class="year">190–195</td></tr>
+        <tr><td class="ancient">洛阳</td><td class="modern">今河南洛阳市</td><td class="event">东汉旧都，190年被董卓焚毁；196年刘协逃回于此</td><td class="year">190 / 196</td></tr>
+        <tr><td class="ancient">许昌（许都）</td><td class="modern">今河南许昌市</td><td class="event">曹操迎汉献帝定都于此，"挟天子以令诸侯"</td><td class="year">196</td></tr>
+        <tr><td class="ancient">虎牢关</td><td class="modern">今河南荥阳市汜水镇</td><td class="event">讨董联军前锋与吕布交战处</td><td class="year">190</td></tr>
+        <tr><td class="ancient">官渡</td><td class="modern">今河南中牟县东北</td><td class="event">官渡之战主战场</td><td class="year">200</td></tr>
+        <tr><td class="ancient">乌巢</td><td class="modern">今河南延津县东南</td><td class="event">曹操夜袭火烧袁绍粮仓</td><td class="year">200</td></tr>
+        <tr><td class="ancient">宛城</td><td class="modern">今河南南阳市</td><td class="event">张绣叛而复降后再叛，曹昂、典韦战死于此</td><td class="year">197</td></tr>
+        <tr><td class="ancient">邺城</td><td class="modern">今河北临漳县西南</td><td class="event">袁绍统治核心；官渡后逐步被曹操接管，成为曹魏根据地</td><td class="year">200s</td></tr>
+        <tr><td class="ancient">赤壁</td><td class="modern">今湖北赤壁市</td><td class="event">孙刘联军火攻大败曹操南征大军</td><td class="year">208</td></tr>
+        <tr><td class="ancient">长坂坡</td><td class="modern">今湖北当阳市</td><td class="event">曹操追击刘备，赵云单骑救主、张飞据桥吓退曹军</td><td class="year">208</td></tr>
+        <tr><td class="ancient">江东（建业）</td><td class="modern">今江苏南京市一带</td><td class="event">孙权势力根据地，赤壁之战的联军后方</td><td class="year">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="compare-intro" style="margin-bottom:56px;">
+    从地图上能直观看出：曹操的势力扩张基本沿着<b>黄河中下游</b>展开（长安→洛阳→许昌→官渡→乌巢，都挤在今天河南境内一小片区域），
+    这也是为什么官渡之战对曹操而言是真正的"背水一战"——退无可退，身后就是许昌和皇帝。
+    而208年赤壁之战的战场（湖北赤壁）离许昌已经有数百公里，说明曹操这次是主动大举南征，
+    一旦战败,补给线拉得太长的问题立刻暴露,这也是他速败的原因之一。
+  </p>
+
+  <p class="footnote">
+    本图解已收录官方公布配音演员表中的全部角色：核心三人（曹操/袁绍/刘协，各含少年版，由蒋钲圣、陈一伊、何梓骞分别配少年时期）、
+    七位官渡阵营历史人物、以及麦子/渠穆/师父/童子四个电影原创角色。影片明确弱化了刘备、关羽、张飞、董卓、吕布等传统三国演义人物，未在此列。
+    渠穆、师父、童子三人的具体剧情设定公开资料披露有限，介绍以推测为主，看片后可进一步补充修正。
+    人物形象均为示意插画，非影片实际画面。
+    <br>参考：
+    <a href="https://zh.wikipedia.org/zh-hans/%E4%B8%89%E5%9B%BD%E7%9A%84%E6%98%9F%E7%A9%BA%E7%AC%AC%E4%B8%80%E9%83%A8">维基百科</a> ·
+    <a href="https://baike.baidu.com/item/%E4%B8%89%E5%9B%BD%E7%9A%84%E6%98%9F%E7%A9%BA%E7%AC%AC%E4%B8%80%E9%83%A8/66327706">百度百科</a> ·
+    <a href="https://baike.baidu.com/item/%E5%88%98%E5%8D%8F/66752994">百度百科·刘协</a> ·
+    <a href="https://www.163.com/dy/article/KAS0E4710552S1WG.html">网易报道</a> ·
+    <a href="https://zh.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E7%AC%AC%E4%B8%80%E9%83%A8%EF%BC%9A%E4%BA%89%E6%B4%9B%E9%98%B3">维基百科·争洛阳</a> ·
+    <a href="https://www.sohu.com/a/1048984262_121347613">搜狐·争洛阳报道</a> ·
+    <a href="https://www.zhihu.com/question/1956798193498035287/answer/1957206460367864124">知乎·刘协历史真实性讨论</a> ·
+    <a href="https://www.163.com/dy/article/KCJH7CBA0521CHQJ.html">网易·星空问题分析</a> ·
+    <a href="https://www.zhihu.com/question/2059979827566863683">知乎·争洛阳市场评价</a>
+  </p>
+</div>
+
+</body></html>
