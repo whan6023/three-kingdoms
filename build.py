@@ -20,38 +20,46 @@ def img_path(folder, name, ext=None):
 # 人物数据: (名字, 显示名+拼音, 备注, 电影配音演员, 电视剧演员, 历史画像名, 三国的星空图, 争洛阳图, 电视剧剧照, 关系简介)
 # 人物数据: (名字, 显示名+拼音, 备注, 电影配音演员, 电视剧演员, 历史画像名, 三国的星空图, 争洛阳图, 电视剧剧照, 争洛阳配音演员, 关系简介)
 PEOPLE = [
+    # ==== 曹魏 · 曹操阵营 ====
     ("曹操","曹操<br><span class=py>Cáo Cāo</span>","字孟德","檀健次","于和伟","曹操","曹操","曹操","曹操","王凯","曹魏奠基者，挟天子以令诸侯。官渡之战大败袁绍，统一北方。与荀彧、郭嘉、曹洪、夏侯惇、许褚为一伙；杀董承、杨修，晚年猜忌司马懿。"),
     ("荀彧","荀彧<br><span class=py>Xún Yù</span>","彧 yù","囧森瑟夫","王劲松","荀彧","荀彧","","荀彧","","曹操首席谋士（王佐之才），举荐郭嘉、荀攸等大批人才。后因反对曹操称魏公、坚持汉臣底线，被疏远后郁郁而终。"),
     ("夏侯惇","夏侯惇<br><span class=py>Xiàhóu Dūn</span>","惇 dūn","肖合来提·艾尼","杨涵斌","夏侯惇","夏侯惇","","夏侯惇","","曹操族弟，随曹操起兵的头号将领，作战伤一目仍统兵。曹操最信任的宗族将领之一。"),
     ("曹洪","曹洪<br><span class=py>Cáo Hóng</span>","字子廉","巽辰","陈之辉","曹洪","曹洪","","曹洪","","曹操堂弟，早年起兵时让马救曹操（天下可无洪，不可无君）。曹魏宗室将领。"),
     ("张郃","张郃<br><span class=py>Zhāng Hé</span>","郃 hé","一舟","郭家诺","张郃","张郃","","张郃","","原袁绍部将，官渡之战投降曹操，成为曹魏五子良将之一。"),
-    ("汉献帝·刘协","汉献帝 · 刘协<br><span class=py>Liú Xié</span>","末代天子","旺旺","王茂蕾","汉献帝","汉献帝刘协","刘协","汉献帝刘协","","东汉末代皇帝，被董卓拥立、被曹操迎至许昌挟持。220年禅位于曹丕，东汉终结。"),
-    ("董承","董承<br><span class=py>Dǒng Chéng</span>","","杨卫","赵彦民","董承","董承","","董承","","汉献帝岳父（国舅），受《衣带诏》联络刘备等密谋铲除曹操，事泄被曹操诛杀。"),
-    ("许褚","许褚<br><span class=py>Xǔ Chǔ</span>","褚 chǔ","良生","李龙","许褚","许褚","","许褚","","曹操贴身护卫（虎痴），力大忠勇。官渡后因许攸居功自傲，将许攸斩杀。"),
     ("郭嘉","郭嘉<br><span class=py>Guō Jiā</span>","字奉孝","","曹磊","郭嘉","","","郭嘉","","曹操谋士（鬼才），料事如神。英年早逝，若多活几年，司马懿出山路或不同。"),
+    ("许褚","许褚<br><span class=py>Xǔ Chǔ</span>","褚 chǔ","良生","李龙","许褚","许褚","","许褚","","曹操贴身护卫（虎痴），力大忠勇。官渡后因许攸居功自傲，将许攸斩杀。"),
+    ("董承","董承<br><span class=py>Dǒng Chéng</span>","","杨卫","赵彦民","董承","董承","","董承","","汉献帝岳父（国舅），受《衣带诏》联络刘备等密谋铲除曹操，事泄被曹操诛杀。"),
+    # ==== 汉室 ====
+    ("汉献帝·刘协","汉献帝 · 刘协<br><span class=py>Liú Xié</span>","末代天子","旺旺","王茂蕾","汉献帝","汉献帝刘协","刘协","汉献帝刘协","","东汉末代皇帝，被董卓拥立、被曹操迎至许昌挟持。220年禅位于曹丕，东汉终结。"),
+    # ==== 袁绍阵营 ====
     ("袁绍","袁绍<br><span class=py>Yuán Shào</span>","字本初","路金波","","袁绍","袁绍","袁绍","","魏超","出身四世三公，讨董联军盟主。曹操少年挚友，官渡之战被曹操以少胜多击败，后忧愤而终。"),
     ("许攸","许攸<br><span class=py>Xǔ Yōu</span>","攸 yōu","任俊鹏","","许攸","许攸","","","","袁绍谋士，官渡之战因家人犯法被冷落，愤而投曹献火烧乌巢之计。后居功自傲被许褚所杀。"),
+    # ==== 《三国的星空》原创 ====
     ("麦子","麦子<br><span class=py>Mài zi</span>","曹操的狗","方浩然","","","麦子","","","","电影原创角色：始终陪伴曹操的狗，全片情感担当（催泪点）。"),
     ("渠穆","渠穆<br><span class=py>Qú Mù</span>","渠 qú","沉寂","","","渠穆","","","","官渡之战剧情线的阵营配角，具体设定披露较少。"),
     ("师父","师父<br><span class=py>Shīfu</span>","易中天客串","易中天","","","师父","","","","易中天亲自配音的引路人/说书人式角色。"),
     ("童子","童子<br><span class=py>Tóngzǐ</span>","","李潇宇","","","童子","","","","电影原创小角色。"),
+    # ==== 司马家 ====
     ("司马懿","司马懿<br><span class=py>Sīmǎ Yì</span>","懿 yì","","吴秀波","司马懿","","","司马懿","","曹魏重臣，鹰视狼顾。辅佐曹丕夺嫡、曹叡抗蜀，与诸葛亮六出祁山对弈；暮年高平陵之变诛曹爽夺权，奠定司马晋基业。"),
     ("张春华","张春华<br><span class=py>Zhāng Chūnhuá</span>","","","刘涛","张春华","","","张春华","","司马懿正妻，刚烈果决，与郭照为义姐妹。"),
-    ("曹丕","曹丕<br><span class=py>Cáo Pī</span>","字子桓","","李晨","曹丕","","","曹丕","","曹操之子，夺嫡击败曹植，220年受禅称帝建魏。司马懿辅佐对象。"),
-    ("柏灵筠","柏灵筠<br><span class=py>Bǎi Língyún</span>","柏 bǎi","","张钧甯","","","","柏灵筠","","曹丕派到司马懿身边的卧底美人，后被其打动成侧室（虚构角色）。"),
-    ("郭照","郭照<br><span class=py>Guō Zhào</span>","","","唐艺昕","郭照","","","郭照","","张春华义妹，入宫成为曹丕皇后（郭女王）。"),
-    ("杨修","杨修<br><span class=py>Yáng Xiū</span>","字德祖","","翟天临","杨修","","","杨修","","曹植夺嫡幕僚，恃才放旷（《鸡肋》典故），卷入立嗣之争被曹操处死。"),
-    ("甄宓","甄宓<br><span class=py>Zhēn Fú</span>","宓 fú","","张芷溪","甄宓","","","甄宓","","袁绍儿媳出身，被曹丕纳为夫人，曹叡生母；因后宫倾轧被曹丕赐死。"),
-    ("曹植","曹植<br><span class=py>Cáo Zhí</span>","字子建","","王仁君","曹植","","","曹植","","曹操之子，建安才子，夺嫡败于曹丕，七步诗传世。"),
-    ("曹叡","曹叡<br><span class=py>Cáo Ruì</span>","叡 ruì","","刘欢","曹叡","","","曹叡","","曹丕之子，魏明帝，司马懿之君；多疑猜忌。"),
-    ("诸葛亮","诸葛亮<br><span class=py>Zhūgě Liàng</span>","字孔明","","王洛勇","诸葛亮","","","诸葛亮","","蜀汉丞相，六出祁山北伐曹魏，与司马懿隔渭对弈，病逝五丈原。"),
-    ("曹真","曹真<br><span class=py>Cáo Zhēn</span>","字子丹","","章贺","曹真","","","曹真","","曹氏宗室大将，曹叡托孤重臣，与曹休一起排挤司马懿。"),
-    ("曹休","曹休<br><span class=py>Cáo Xiū</span>","字文烈","","杜星奇","曹休","","","曹休","","曹操族子，东线防吴主帅，与曹真同为宗室，牵制司马懿军权。"),
-    ("曹爽","曹爽<br><span class=py>Cáo Shuǎng</span>","字昭伯","","杜奕衡","曹爽","","","曹爽","","曹真之子，曹叡托孤后专权；司马懿装病十年发动高平陵之变，被诛灭三族。"),
     ("司马师","司马师<br><span class=py>Sīmǎ Shī</span>","字子元","","肖顺尧","司马师","","","司马师","","司马懿长子，沉稳接班，高平陵之变核心执行者。"),
     ("司马昭","司马昭<br><span class=py>Sīmǎ Zhāo</span>","字子上","","檀健次","司马昭","","","司马昭","","司马懿次子，野心外露（《司马昭之心》）。"),
     ("司马孚","司马孚<br><span class=py>Sīmǎ Fú</span>","字叔达","","王东","司马孚","","","司马孚","","司马懿之弟，坚持魏臣身份，不参与兄长夺权。"),
     ("侯吉","侯吉<br><span class=py>Hóu Jí</span>","虚构角色","","来喜","","","","侯吉","","司马府管家，最早识破司马懿装病的人之一（虚构角色）。"),
+    ("柏灵筠","柏灵筠<br><span class=py>Bǎi Língyún</span>","柏 bǎi","","张钧甯","","","","柏灵筠","","曹丕派到司马懿身边的卧底美人，后被其打动成侧室（虚构角色）。"),
+    ("郭照","郭照<br><span class=py>Guō Zhào</span>","","","唐艺昕","郭照","","","郭照","","张春华义妹，入宫成为曹丕皇后（郭女王）。"),
+    # ==== 曹魏 · 君主与宗室 ====
+    ("曹丕","曹丕<br><span class=py>Cáo Pī</span>","字子桓","","李晨","曹丕","","","曹丕","","曹操之子，夺嫡击败曹植，220年受禅称帝建魏。司马懿辅佐对象。"),
+    ("曹植","曹植<br><span class=py>Cáo Zhí</span>","字子建","","王仁君","曹植","","","曹植","","曹操之子，建安才子，夺嫡败于曹丕，七步诗传世。"),
+    ("曹叡","曹叡<br><span class=py>Cáo Ruì</span>","叡 ruì","","刘欢","曹叡","","","曹叡","","曹丕之子，魏明帝，司马懿之君；多疑猜忌。"),
+    ("曹真","曹真<br><span class=py>Cáo Zhēn</span>","字子丹","","章贺","曹真","","","曹真","","曹氏宗室大将，曹叡托孤重臣，与曹休一起排挤司马懿。"),
+    ("曹休","曹休<br><span class=py>Cáo Xiū</span>","字文烈","","杜星奇","曹休","","","曹休","","曹操族子，东线防吴主帅，与曹真同为宗室，牵制司马懿军权。"),
+    ("曹爽","曹爽<br><span class=py>Cáo Shuǎng</span>","字昭伯","","杜奕衡","曹爽","","","曹爽","","曹真之子，曹叡托孤后专权；司马懿装病十年发动高平陵之变，被诛灭三族。"),
+    ("杨修","杨修<br><span class=py>Yáng Xiū</span>","字德祖","","翟天临","杨修","","","杨修","","曹植夺嫡幕僚，恃才放旷（《鸡肋》典故），卷入立嗣之争被曹操处死。"),
+    ("甄宓","甄宓<br><span class=py>Zhēn Fú</span>","宓 fú","","张芷溪","甄宓","","","甄宓","","袁绍儿媳出身，被曹丕纳为夫人，曹叡生母；因后宫倾轧被曹丕赐死。"),
+    # ==== 蜀汉 ====
+    ("诸葛亮","诸葛亮<br><span class=py>Zhūgě Liàng</span>","字孔明","","王洛勇","诸葛亮","","","诸葛亮","","蜀汉丞相，六出祁山北伐曹魏，与司马懿隔渭对弈，病逝五丈原。"),
+    # ==== 《争洛阳》群雄 ====
     ("吕布","吕布<br><span class=py>Lǚ Bù</span>","字奉先","","","吕布","","吕布","","常文涛","董卓义子，勇冠三军（人中吕布），虎牢关前大战关东联军。后诛董卓，反复无常。"),
     ("董卓","董卓<br><span class=py>Dǒng Zhuó</span>","字仲颖","","","董卓","","董卓","","李楠","西凉军阀，入京后废少帝刘辩、立刘协，焚洛阳迁都长安。被吕布所杀。"),
     ("何进","何进<br><span class=py>Hé Jìn</span>","字遂高","","","何进","","何进","","万昊","大将军、外戚（何太后之兄），欲诛宦官反被宦官所杀。"),
@@ -61,71 +69,77 @@ PEOPLE = [
     ("何太后","何太后<br><span class=py>Hé Tàihòu</span>","","","","","","何太后","","李诗萌","汉灵帝皇后、刘辩之母、何进之妹，与何进同争朝政。"),
 ]
 
-# 生成卡片 HTML
+
+# 分组标题与成员（顺序与 PEOPLE 数组一致）
+GROUPS = [
+    ("曹魏 · 曹操阵营", ["曹操","荀彧","夏侯惇","曹洪","张郃","郭嘉","许褚","董承"]),
+    ("汉室", ["汉献帝·刘协"]),
+    ("袁绍阵营", ["袁绍","许攸"]),
+    ("《三国的星空》原创", ["麦子","渠穆","师父","童子"]),
+    ("司马家", ["司马懿","张春华","司马师","司马昭","司马孚","侯吉","柏灵筠","郭照"]),
+    ("曹魏 · 君主与宗室", ["曹丕","曹植","曹叡","曹真","曹休","曹爽","杨修","甄宓"]),
+    ("蜀汉", ["诸葛亮"]),
+    ("《争洛阳》群雄", ["吕布","董卓","何进","袁术","张让","刘辩","何太后"]),
+]
+
+# 生成卡片 HTML（按分组输出，每组带标题）
 cards = []
-for name, disp, note, mv, tv, hist, mvchar, zly, tvshot, zlyv, rel in PEOPLE:
-    hist_img = img_path("images/history", hist) if hist else None
-    # 演员照片：电影配音、电视剧、争洛阳配音都用本人照片（避免与上方剧照重复）
-    mv_img = img_path("images/actors", mv) if mv else None
-    tv_img = img_path("images/actors", tv) if tv else None  # 电视剧演员本人照片
-    mvc_img = img_path("images/movie", mvchar) if mvchar else None
-    zly_img = img_path("images/zhengluoyang", zly) if zly else None
-    tvshot_img = img_path("images/tv", tvshot) if tvshot else None  # 电视剧剧照（仅上方列用）
-    zlyv_img = img_path("images/zlyva", zlyv) if zlyv else None  # 争洛阳配音演员照片
-    note_html = f'<span class="note">{note}</span>' if note else ""
+people_by_name = {p[0]: p for p in PEOPLE}
+for group_name, members in GROUPS:
+    cards.append(f'<h3 class="group">{group_name}</h3>')
+    for name in members:
+        p = people_by_name[name]
+        disp, note, mv, tv, hist, mvchar, zly, tvshot, zlyv, rel = p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9], p[10]
+        hist_img = img_path("images/history", hist) if hist else None
+        # 演员照片：电影配音、电视剧、争洛阳配音都用本人照片（避免与上方剧照重复）
+        mv_img = img_path("images/actors", mv) if mv else None
+        tv_img = img_path("images/actors", tv) if tv else None  # 电视剧演员本人照片
+        mvc_img = img_path("images/movie", mvchar) if mvchar else None
+        zly_img = img_path("images/zhengluoyang", zly) if zly else None
+        tvshot_img = img_path("images/tv", tvshot) if tvshot else None  # 电视剧剧照（仅上方列用）
+        zlyv_img = img_path("images/zlyva", zlyv) if zlyv else None  # 争洛阳配音演员照片
+        note_html = f'<span class="note">{note}</span>' if note else ""
 
-    # 角色形象（历史/三国的星空/争洛阳/大军师司马懿剧照）—— 顶部横排
-    shot_imgs = []
-    if hist_img:
-        shot_imgs.append(f'<figure class="ph"><img src="{hist_img}" alt="{name}历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure>')
-    if mvc_img:
-        shot_imgs.append(f'<figure class="ph"><img src="{mvc_img}" alt="{name}三国的星空形象" loading="lazy"><figcaption>《三国的星空》</figcaption></figure>')
-    if zly_img:
-        shot_imgs.append(f'<figure class="ph"><img src="{zly_img}" alt="{name}争洛阳形象" loading="lazy"><figcaption>《争洛阳》</figcaption></figure>')
-    if tvshot_img:
-        shot_imgs.append(f'<figure class="ph"><img src="{tvshot_img}" alt="{name}电视剧剧照" loading="lazy"><figcaption>《大军师司马懿》</figcaption></figure>')
-    shots_html = "".join(shot_imgs) if shot_imgs else '<div class="noimg">无画像</div>'
+        # 角色形象列（历史画像/三国的星空/争洛阳/大军师司马懿剧照）→ 每列下方对应演员
+        # 列结构: (形象图, 列标题, 演员照片, 演员名, 演员标签)
+        cols = []
+        if hist_img:
+            cols.append((hist_img, "历史画像", None, "", ""))
+        if mvc_img:
+            cols.append((mvc_img, "《三国的星空》", mv_img, mv, "《三国的星空》配音"))
+        if zly_img:
+            cols.append((zly_img, "《争洛阳》", zlyv_img, zlyv, "《争洛阳》配音"))
+        if tvshot_img:
+            cols.append((tvshot_img, "《大军师司马懿》", tv_img, tv, "《大军师司马懿》演员"))
+        if not cols:
+            cols.append((None, "", None, "", ""))
 
-    # 角色形象列（历史画像/三国的星空/争洛阳/大军师司马懿剧照）→ 每列下方对应演员
-    # 列结构: (形象图, 列标题, 演员照片, 演员名, 演员标签)
-    cols = []
-    if hist_img:
-        cols.append((hist_img, "历史画像", None, "", ""))
-    if mvc_img:
-        cols.append((mvc_img, "《三国的星空》", mv_img, mv, "《三国的星空》配音"))
-    if zly_img:
-        cols.append((zly_img, "《争洛阳》", zlyv_img, zlyv, "《争洛阳》配音"))
-    if tvshot_img:
-        cols.append((tvshot_img, "《大军师司马懿》", tv_img, tv, "《大军师司马懿》演员"))
-    if not cols:
-        cols.append((None, "", None, "", ""))
+        # 生成上部形象列 + 下部演员列
+        shot_html = ""
+        chan_html = ""
+        for img, col_title, actor_img, actor_name, actor_tag in cols:
+            if img:
+                shot_html += (f'<figure class="ph"><img src="{img}" alt="{col_title}" loading="lazy">'
+                              f'<figcaption>{col_title}</figcaption></figure>')
+            else:
+                shot_html += '<figure class="ph empty"><div class="noimg">无画像</div><figcaption>&nbsp;</figcaption></figure>'
+            if actor_img and actor_name:
+                chan_html += (f'<figure class="ch"><img src="{actor_img}" alt="{actor_name}" loading="lazy">'
+                              f'<figcaption><span class="who">{actor_name}</span><span class="tag">{actor_tag}</span></figcaption></figure>')
+            else:
+                chan_html += (f'<figure class="ch empty"><div class="noimg">—</div>'
+                              f'<figcaption><span class="who dash">—</span><span class="tag">&nbsp;</span></figcaption></figure>')
 
-    # 生成上部形象列 + 下部演员列
-    shot_html = ""
-    chan_html = ""
-    for img, col_title, actor_img, actor_name, actor_tag in cols:
-        if img:
-            shot_html += (f'<figure class="ph"><img src="{img}" alt="{col_title}" loading="lazy">'
-                          f'<figcaption>{col_title}</figcaption></figure>')
-        else:
-            shot_html += '<figure class="ph empty"><div class="noimg">无画像</div><figcaption>&nbsp;</figcaption></figure>'
-        if actor_img and actor_name:
-            chan_html += (f'<figure class="ch"><img src="{actor_img}" alt="{actor_name}" loading="lazy">'
-                          f'<figcaption><span class="who">{actor_name}</span><span class="tag">{actor_tag}</span></figcaption></figure>')
-        else:
-            chan_html += (f'<figure class="ch empty"><div class="noimg">—</div>'
-                          f'<figcaption><span class="who dash">—</span><span class="tag">&nbsp;</span></figcaption></figure>')
-
-    cards.append(f'''
-    <div class="card">
-      <div class="head">
-        <div class="nm">{disp}</div>
-        {note_html}
-        <p class="rel">{rel}</p>
-      </div>
-      <div class="shots">{shot_html}</div>
-      <div class="channels">{chan_html}</div>
-    </div>''')
+        cards.append(f'''
+        <div class="card">
+          <div class="head">
+            <div class="nm">{disp}</div>
+            {note_html}
+            <p class="rel">{rel}</p>
+          </div>
+          <div class="shots">{shot_html}</div>
+          <div class="channels">{chan_html}</div>
+        </div>''')
 
 cards_html = "\n".join(cards)
 
@@ -150,6 +164,12 @@ h2{{
   padding-bottom:5px;margin:28px 0 14px;letter-spacing:0.06em;
 }}
 .sub{{font-size:12.5px;color:#888;margin:-8px 0 12px;}}
+h3.group{{
+  font-size:15px;color:#a0482e;letter-spacing:0.08em;
+  border-bottom:2px solid #eee;padding-bottom:6px;
+  margin:28px 0 14px;
+}}
+h3.group:first-of-type{{margin-top:10px;}}
 
 /* 人物卡片：上下布局 —— 上角色形象，下演员照片 */
 .cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(700px,1fr));gap:18px;}}
