@@ -26,13 +26,17 @@ h3.group{
 }
 h3.group:first-of-type{margin-top:10px;}
 
-/* 家族谱 */
-.tree{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:8px;}
+/* 家族谱（族谱树） */
+.tree{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:8px;}
 .tree-fam{background:#fafafa;border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;}
-.tree-fam h4{font-size:14px;color:#a0482e;margin:0 0 8px;letter-spacing:0.05em;border-bottom:1px dashed #ddd;padding-bottom:6px;}
-.tree-fam ul{list-style:none;margin:0;padding:0;font-size:12.5px;color:#444;line-height:1.8;}
-.tree-fam li{padding-left:14px;position:relative;}
-.tree-fam li::before{content:"—";position:absolute;left:0;color:#c9a227;}
+.tree-fam h4{font-size:14px;color:#a0482e;margin:0 0 10px;letter-spacing:0.05em;border-bottom:1px dashed #ddd;padding-bottom:6px;}
+.tree-fam ul{list-style:none;margin:0;padding:0;font-size:13px;color:#333;line-height:1.9;}
+.tree-fam ul ul{margin-left:16px;padding-left:14px;border-left:1.5px solid #d8b26a;}
+.tree-fam li{position:relative;padding-left:4px;}
+.tree-fam li::before{content:"└ ";color:#c9a227;}
+.tree-fam ul ul li::before{content:"├ ";color:#c9a227;}
+.tree-fam ul ul li:last-child::before{content:"└ ";color:#c9a227;}
+.tree-fam ul ul li::after{content:"";position:absolute;left:-14px;top:50%;width:14px;height:0;border-top:1.5px solid #d8b26a;}
 
 /* 人物卡片：上下布局 —— 上角色形象，下演员照片 */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(700px,1fr));gap:18px;}
@@ -104,11 +108,11 @@ table.geo{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
 
   <h2>家族谱</h2>
   <div class="tree">
-<div class="tree-fam"><h4>曹氏</h4><ul><li>曹嵩 — 曹操（父）</li><li>曹操 — 曹丕、曹植（子）</li><li>曹操 — 曹真（养子）、曹休（族子）、曹洪（堂弟）</li><li>曹丕 — 曹叡（子）</li><li>曹丕 — 甄宓（妻）、郭照（后妻）</li><li>曹真 — 曹爽（子）</li><li>曹操 — 夏侯惇（族兄弟）</li></ul></div>
-<div class="tree-fam"><h4>司马氏</h4><ul><li>司马防 — 司马懿、司马孚（子）</li><li>司马懿 — 张春华（妻）、柏灵筠（侧室）</li><li>司马懿 — 司马师、司马昭（子）</li><li>张春华 — 郭照（义妹）</li><li>侯吉（司马府管家，非血亲）</li></ul></div>
-<div class="tree-fam"><h4>袁氏</h4><ul><li>袁绍、袁术（同父异母兄弟）</li></ul></div>
-<div class="tree-fam"><h4>汉室</h4><ul><li>汉灵帝 — 刘辩、刘协（子）</li><li>何太后（灵帝皇后）— 何进（兄）</li><li>刘协 — 董承（岳父）</li></ul></div>
-<div class="tree-fam"><h4>其他</h4><ul><li>董卓 — 吕布（义父子）</li><li>诸葛亮、荀彧、郭嘉、许褚、杨修、张郃、许攸（无家族谱）</li></ul></div>
+<div class="tree-fam"><h4>曹氏</h4><ul><li>曹嵩<ul><li>曹操<ul><li>曹丕<ul><li>曹叡</li></ul></li><li>曹植</li><li>曹真（养子）<ul><li>曹爽</li></ul></li></ul></li><li>夏侯惇（族亲）</li><li>曹洪（堂弟）</li><li>曹休（族子）</li></ul></li></ul></div>
+<div class="tree-fam"><h4>司马氏</h4><ul><li>司马防<ul><li>司马懿<ul><li>司马师</li><li>司马昭</li></ul></li><li>司马孚</li></ul></li><li>张春华（司马懿妻）</li><li>柏灵筠（司马懿侧室）</li><li>郭照（张春华义妹）</li><li>侯吉（司马府管家）</li></ul></div>
+<div class="tree-fam"><h4>袁氏</h4><ul><li>袁逢（四世三公）<ul><li>袁绍</li><li>袁术</li></ul></li></ul></div>
+<div class="tree-fam"><h4>汉室</h4><ul><li>汉灵帝<ul><li>刘辩</li><li>刘协<ul><li>董承（岳父）</li></ul></li></ul></li><li>何太后（灵帝皇后）</li><li>何进（何太后兄）</li></ul></div>
+<div class="tree-fam"><h4>其他</h4><ul><li>董卓<ul><li>吕布（义子）</li></ul></li></ul></div>
   </div>
 
   <h2>人物</h2>

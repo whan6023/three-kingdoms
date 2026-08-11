@@ -82,58 +82,35 @@ GROUPS = [
     ("《争洛阳》群雄", ["吕布","董卓","何进","袁术","张让","刘辩","何太后"]),
 ]
 
-# 家族谱（族谱树：人物 → 子辈）
-# 结构: (家族名, [(人物, [(子, [(孙, ...)]), ...]), ...])
+# 家族谱（按辈分行：每行一个辈分，同辈横排）
+# 结构: (家族名, [(辈分标签, [该辈成员, ...]), ...])
 FAMILY_TREE = [
     ("曹氏", [
-        ("曹嵩", [
-            ("曹操", [
-                ("曹丕", [
-                    ("曹叡", []),
-                ]),
-                ("曹植", []),
-                ("曹真（养子）", [
-                    ("曹爽", []),
-                ]),
-            ]),
-            ("夏侯惇（族亲）", []),
-            ("曹洪（堂弟）", []),
-            ("曹休（族子）", []),
-        ]),
+        ("祖父", ["曹嵩"]),
+        ("父辈", ["曹操", "夏侯惇（族亲）", "曹洪（堂弟）"]),
+        ("子辈", ["曹丕", "曹植", "曹真（养子）", "曹休（族子）"]),
+        ("孙辈", ["曹叡", "曹爽"]),
     ]),
     ("司马氏", [
-        ("司马防", [
-            ("司马懿", [
-                ("司马师", []),
-                ("司马昭", []),
-            ]),
-            ("司马孚", []),
-        ]),
-        ("张春华（司马懿妻）", []),
-        ("柏灵筠（司马懿侧室）", []),
-        ("郭照（张春华义妹）", []),
-        ("侯吉（司马府管家）", []),
+        ("祖父", ["司马防"]),
+        ("父辈", ["司马懿", "司马孚"]),
+        ("子辈", ["司马师", "司马昭"]),
+        ("配偶", ["张春华（妻）", "柏灵筠（侧室）"]),
+        ("关联", ["郭照（义妹）", "侯吉（管家）"]),
     ]),
     ("袁氏", [
-        ("袁逢（四世三公）", [
-            ("袁绍", []),
-            ("袁术", []),
-        ]),
+        ("祖父", ["袁逢（四世三公）"]),
+        ("子辈", ["袁绍", "袁术"]),
     ]),
     ("汉室", [
-        ("汉灵帝", [
-            ("刘辩", []),
-            ("刘协", [
-                ("董承（岳父）", []),
-            ]),
-        ]),
-        ("何太后（灵帝皇后）", []),
-        ("何进（何太后兄）", []),
+        ("父辈", ["汉灵帝", "何进（何太后兄）"]),
+        ("子辈", ["刘辩", "刘协"]),
+        ("配偶", ["何太后（灵帝皇后）"]),
+        ("关联", ["董承（刘协岳父）"]),
     ]),
     ("其他", [
-        ("董卓", [
-            ("吕布（义子）", []),
-        ]),
+        ("父辈", ["董卓"]),
+        ("子辈", ["吕布（义子）"]),
     ]),
 ]
 
@@ -198,18 +175,17 @@ for group_name, members in GROUPS:
 
 cards_html = "\n".join(cards)
 
-# 生成家族谱树 HTML（递归渲染嵌套 ul/li）
-def render_tree(nodes, depth=0):
-    if not nodes:
-        return ""
-    items = []
-    for person, children in nodes:
-        items.append(f"<li>{person}{render_tree(children, depth+1)}</li>")
-    return f"<ul>{''.join(items)}</ul>"
-
+# 生成家族谱 HTML（每行一个辈分，同辈横排）
 tree_blocks = []
-for fam_name, nodes in FAMILY_TREE:
-    tree_blocks.append(f'<div class="tree-fam"><h4>{fam_name}</h4>{render_tree(nodes)}</div>')
+for fam_name, rows in FAMILY_TREE:
+    rows_html = []
+    for gen_label, members in rows:
+        chips = "".join(f'<span class="gen-chip">{m}</span>' for m in members)
+        rows_html.append(
+            f'<div class="gen-row"><span class="gen-label">{gen_label}</span>'
+            f'<div class="gen-members">{chips}</div></div>'
+        )
+    tree_blocks.append(f'<div class="tree-fam"><h4>{fam_name}</h4>{"".join(rows_html)}</div>')
 FAMILY_HTML = "\n".join(tree_blocks)
 
 html = f'''<!DOCTYPE html>
@@ -240,17 +216,15 @@ h3.group{{
 }}
 h3.group:first-of-type{{margin-top:10px;}}
 
-/* 家族谱（族谱树） */
-.tree{{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:8px;}}
+/* 家族谱（按辈分行：每行一个辈分，同辈横排） */
+.tree{{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px;margin-bottom:8px;}}
 .tree-fam{{background:#fafafa;border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;}}
 .tree-fam h4{{font-size:14px;color:#a0482e;margin:0 0 10px;letter-spacing:0.05em;border-bottom:1px dashed #ddd;padding-bottom:6px;}}
-.tree-fam ul{{list-style:none;margin:0;padding:0;font-size:13px;color:#333;line-height:1.9;}}
-.tree-fam ul ul{{margin-left:16px;padding-left:14px;border-left:1.5px solid #d8b26a;}}
-.tree-fam li{{position:relative;padding-left:4px;}}
-.tree-fam li::before{{content:"└ ";color:#c9a227;}}
-.tree-fam ul ul li::before{{content:"├ ";color:#c9a227;}}
-.tree-fam ul ul li:last-child::before{{content:"└ ";color:#c9a227;}}
-.tree-fam ul ul li::after{{content:"";position:absolute;left:-14px;top:50%;width:14px;height:0;border-top:1.5px solid #d8b26a;}}
+.gen-row{{display:flex;align-items:baseline;gap:10px;padding:5px 0;border-bottom:1px dotted #eee;}}
+.gen-row:last-child{{border-bottom:none;}}
+.gen-label{{flex:0 0 44px;font-size:12px;color:#a0482e;font-weight:600;letter-spacing:0.05em;}}
+.gen-members{{display:flex;flex-wrap:wrap;gap:6px;}}
+.gen-chip{{font-size:13px;color:#333;background:#fff;border:1px solid #eee;border-radius:999px;padding:2px 10px;white-space:nowrap;}}
 
 /* 人物卡片：上下布局 —— 上角色形象，下演员照片 */
 .cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(700px,1fr));gap:18px;}}
