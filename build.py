@@ -65,12 +65,12 @@ PEOPLE = [
 cards = []
 for name, disp, note, mv, tv, hist, mvchar, zly, tvshot, zlyv, rel in PEOPLE:
     hist_img = img_path("images/history", hist) if hist else None
-    # 演员照片：电影配音用 actors/ 真人照，电视剧演员用 tv/ 剧照扮相（与上方剧照列同张图）
+    # 演员照片：电影配音、电视剧、争洛阳配音都用本人照片（避免与上方剧照重复）
     mv_img = img_path("images/actors", mv) if mv else None
-    tv_img = img_path("images/tv", tvshot) if tvshot else None  # 用角色名剧照（与上方《大军师司马懿》列同图）
+    tv_img = img_path("images/actors", tv) if tv else None  # 电视剧演员本人照片
     mvc_img = img_path("images/movie", mvchar) if mvchar else None
     zly_img = img_path("images/zhengluoyang", zly) if zly else None
-    tvshot_img = img_path("images/tv", tvshot) if tvshot else None
+    tvshot_img = img_path("images/tv", tvshot) if tvshot else None  # 电视剧剧照（仅上方列用）
     zlyv_img = img_path("images/zlyva", zlyv) if zlyv else None  # 争洛阳配音演员照片
     note_html = f'<span class="note">{note}</span>' if note else ""
 
@@ -86,22 +86,35 @@ for name, disp, note, mv, tv, hist, mvchar, zly, tvshot, zlyv, rel in PEOPLE:
         shot_imgs.append(f'<figure class="ph"><img src="{tvshot_img}" alt="{name}电视剧剧照" loading="lazy"><figcaption>《大军师司马懿》</figcaption></figure>')
     shots_html = "".join(shot_imgs) if shot_imgs else '<div class="noimg">无画像</div>'
 
-    # 演员照片：电影配音用 actors/ 真人照，电视剧用 tv/ 剧照扮相，争洛阳配音用 zlyva/ 照片
-    mv_html = (f'<figure class="ch"><img src="{mv_img}" alt="{mv}" loading="lazy">'
-               f'<figcaption><span class="who">{mv}</span><span class="tag">《三国的星空》配音</span></figcaption></figure>'
-               if mv_img and mv else
-               f'<figure class="ch empty"><div class="noimg">—</div>'
-               f'<figcaption><span class="who dash">—</span><span class="tag">《三国的星空》配音</span></figcaption></figure>')
-    tv_html = (f'<figure class="ch"><img src="{tv_img}" alt="{tv}" loading="lazy">'
-               f'<figcaption><span class="who">{tv}</span><span class="tag">电视剧演员（剧照）</span></figcaption></figure>'
-               if tv_img and tv else
-               f'<figure class="ch empty"><div class="noimg">—</div>'
-               f'<figcaption><span class="who dash">—</span><span class="tag">电视剧演员（剧照）</span></figcaption></figure>')
-    zlyv_html = (f'<figure class="ch"><img src="{zlyv_img}" alt="{zlyv}" loading="lazy">'
-                 f'<figcaption><span class="who">{zlyv}</span><span class="tag">《争洛阳》配音</span></figcaption></figure>'
-                 if zlyv_img and zlyv else
-                 f'<figure class="ch empty"><div class="noimg">—</div>'
-                 f'<figcaption><span class="who dash">—</span><span class="tag">《争洛阳》配音</span></figcaption></figure>')
+    # 角色形象列（历史画像/三国的星空/争洛阳/大军师司马懿剧照）→ 每列下方对应演员
+    # 列结构: (形象图, 列标题, 演员照片, 演员名, 演员标签)
+    cols = []
+    if hist_img:
+        cols.append((hist_img, "历史画像", None, "", ""))
+    if mvc_img:
+        cols.append((mvc_img, "《三国的星空》", mv_img, mv, "《三国的星空》配音"))
+    if zly_img:
+        cols.append((zly_img, "《争洛阳》", zlyv_img, zlyv, "《争洛阳》配音"))
+    if tvshot_img:
+        cols.append((tvshot_img, "《大军师司马懿》", tv_img, tv, "《大军师司马懿》演员"))
+    if not cols:
+        cols.append((None, "", None, "", ""))
+
+    # 生成上部形象列 + 下部演员列
+    shot_html = ""
+    chan_html = ""
+    for img, col_title, actor_img, actor_name, actor_tag in cols:
+        if img:
+            shot_html += (f'<figure class="ph"><img src="{img}" alt="{col_title}" loading="lazy">'
+                          f'<figcaption>{col_title}</figcaption></figure>')
+        else:
+            shot_html += '<figure class="ph empty"><div class="noimg">无画像</div><figcaption>&nbsp;</figcaption></figure>'
+        if actor_img and actor_name:
+            chan_html += (f'<figure class="ch"><img src="{actor_img}" alt="{actor_name}" loading="lazy">'
+                          f'<figcaption><span class="who">{actor_name}</span><span class="tag">{actor_tag}</span></figcaption></figure>')
+        else:
+            chan_html += (f'<figure class="ch empty"><div class="noimg">—</div>'
+                          f'<figcaption><span class="who dash">—</span><span class="tag">&nbsp;</span></figcaption></figure>')
 
     cards.append(f'''
     <div class="card">
@@ -110,12 +123,8 @@ for name, disp, note, mv, tv, hist, mvchar, zly, tvshot, zlyv, rel in PEOPLE:
         {note_html}
         <p class="rel">{rel}</p>
       </div>
-      <div class="shots">{shots_html}</div>
-      <div class="channels">
-        {mv_html}
-        {tv_html}
-        {zlyv_html}
-      </div>
+      <div class="shots">{shot_html}</div>
+      <div class="channels">{chan_html}</div>
     </div>''')
 
 cards_html = "\n".join(cards)
@@ -158,18 +167,19 @@ h2{{
   padding:8px 10px;border-radius:0 6px 6px 0;
   margin-top:10px;
 }}
-.shots{{display:grid;grid-template-columns:repeat(4,140px);gap:10px;justify-content:center;justify-items:center;}}
-.ph{{margin:0;width:140px;}}
-.ph img{{width:140px;height:170px;object-fit:cover;border-radius:8px;display:block;background:#eee;}}
+.shots{{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}}
+.ph{{margin:0;width:150px;}}
+.ph img{{width:150px;height:182px;object-fit:cover;border-radius:8px;display:block;background:#eee;}}
 .ph figcaption{{font-size:11px;color:#999;text-align:center;margin-top:4px;}}
-.channels{{display:grid;grid-template-columns:repeat(4,140px);gap:10px;justify-content:center;justify-items:center;border-top:1px dashed #ddd;padding-top:12px;}}
-.ch{{margin:0;width:140px;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;}}
-.ch img{{width:88px;height:108px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}}
+.ph.empty .noimg{{width:150px;height:182px;border-radius:8px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;}}
+.channels{{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;border-top:1px dashed #ddd;padding-top:12px;}}
+.ch{{margin:0;width:150px;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;}}
+.ch img{{width:110px;height:135px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}}
 .ch figcaption{{font-size:12.5px;}}
 .ch .who{{display:block;font-weight:600;}}
 .ch .who.dash{{color:#ccc;font-weight:400;}}
-.ch .tag{{display:block;font-size:10.5px;color:#999;margin-top:2px;}}
-.ch.empty .noimg{{width:88px;height:108px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}}
+.ch .tag{{display:block;font-size:11px;color:#999;margin-top:2px;}}
+.ch.empty .noimg{{width:110px;height:135px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}}
 .noimg{{display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;}}
 
 /* 地图 */
@@ -191,12 +201,13 @@ table.geo{{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
 .footnote{{font-size:11.5px;color:#999;text-align:center;margin-top:28px;border-top:1px solid #eee;padding-top:14px;}}
 @media (max-width:560px){{
   .cards{{grid-template-columns:1fr;}}
-  .shots,.channels{{grid-template-columns:repeat(4,80px);gap:6px;}}
-  .ph{{width:80px;}}
-  .ph img{{width:80px;height:98px;}}
-  .ch{{width:80px;}}
-  .ch img{{width:56px;height:68px;}}
-  .ch.empty .noimg{{width:56px;height:68px;}}
+  .shots,.channels{{gap:6px;}}
+  .ph{{width:100px;}}
+  .ph img{{width:100px;height:122px;}}
+  .ph.empty .noimg{{width:100px;height:122px;}}
+  .ch{{width:100px;}}
+  .ch img{{width:80px;height:98px;}}
+  .ch.empty .noimg{{width:80px;height:98px;}}
 }}
 </style>
 </head>
