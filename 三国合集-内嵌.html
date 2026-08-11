@@ -36,18 +36,18 @@ h2{
   padding:8px 10px;border-radius:0 6px 6px 0;
   margin-top:10px;
 }
-.shots{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.shots{display:grid;grid-template-columns:repeat(3,150px);gap:12px;justify-content:center;justify-items:center;}
 .ph{margin:0;width:150px;}
 .ph img{width:150px;height:182px;object-fit:cover;border-radius:8px;display:block;background:#eee;}
 .ph figcaption{font-size:11px;color:#999;text-align:center;margin-top:4px;}
-.channels{display:flex;gap:14px;justify-content:center;border-top:1px dashed #ddd;padding-top:12px;}
-.ch{flex:0 1 200px;margin:0;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 10px 10px;}
-.ch img{width:110px;height:135px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}
+.channels{display:grid;grid-template-columns:repeat(3,150px);gap:12px;justify-content:center;justify-items:center;border-top:1px dashed #ddd;padding-top:12px;}
+.ch{margin:0;width:150px;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;}
+.ch img{width:96px;height:118px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}
 .ch figcaption{font-size:13px;}
 .ch .who{display:block;font-weight:600;}
 .ch .who.dash{color:#ccc;font-weight:400;}
 .ch .tag{display:block;font-size:11px;color:#999;margin-top:2px;}
-.ch.empty .noimg{width:110px;height:135px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}
+.ch.empty .noimg{width:96px;height:118px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}
 .noimg{display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;}
 
 /* 地图 */
@@ -69,11 +69,12 @@ table.geo{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
 .footnote{font-size:11.5px;color:#999;text-align:center;margin-top:28px;border-top:1px solid #eee;padding-top:14px;}
 @media (max-width:560px){
   .cards{grid-template-columns:1fr;}
-  .ph{width:110px;}
-  .ph img{width:110px;height:134px;}
-  .ch{flex:0 1 150px;}
-  .ch img{width:88px;height:108px;}
-  .ch.empty .noimg{width:88px;height:108px;}
+  .shots,.channels{grid-template-columns:repeat(3,100px);gap:8px;}
+  .ph{width:100px;}
+  .ph img{width:100px;height:122px;}
+  .ch{width:100px;}
+  .ch img{width:70px;height:86px;}
+  .ch.empty .noimg{width:70px;height:86px;}
 }
 </style>
 </head>
