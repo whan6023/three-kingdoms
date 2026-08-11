@@ -82,35 +82,58 @@ GROUPS = [
     ("《争洛阳》群雄", ["吕布","董卓","何进","袁术","张让","刘辩","何太后"]),
 ]
 
-# 家族谱（只列名字与关系）
+# 家族谱（族谱树：人物 → 子辈）
+# 结构: (家族名, [(人物, [(子, [(孙, ...)]), ...]), ...])
 FAMILY_TREE = [
     ("曹氏", [
-        "曹嵩 — 曹操（父）",
-        "曹操 — 曹丕、曹植（子）",
-        "曹操 — 曹真（养子）、曹休（族子）、曹洪（堂弟）",
-        "曹丕 — 曹叡（子）",
-        "曹丕 — 甄宓（妻）、郭照（后妻）",
-        "曹真 — 曹爽（子）",
-        "曹操 — 夏侯惇（族兄弟）",
+        ("曹嵩", [
+            ("曹操", [
+                ("曹丕", [
+                    ("曹叡", []),
+                ]),
+                ("曹植", []),
+                ("曹真（养子）", [
+                    ("曹爽", []),
+                ]),
+            ]),
+            ("夏侯惇（族亲）", []),
+            ("曹洪（堂弟）", []),
+            ("曹休（族子）", []),
+        ]),
     ]),
     ("司马氏", [
-        "司马防 — 司马懿、司马孚（子）",
-        "司马懿 — 张春华（妻）、柏灵筠（侧室）",
-        "司马懿 — 司马师、司马昭（子）",
-        "张春华 — 郭照（义妹）",
-        "侯吉（司马府管家，非血亲）",
+        ("司马防", [
+            ("司马懿", [
+                ("司马师", []),
+                ("司马昭", []),
+            ]),
+            ("司马孚", []),
+        ]),
+        ("张春华（司马懿妻）", []),
+        ("柏灵筠（司马懿侧室）", []),
+        ("郭照（张春华义妹）", []),
+        ("侯吉（司马府管家）", []),
     ]),
     ("袁氏", [
-        "袁绍、袁术（同父异母兄弟）",
+        ("袁逢（四世三公）", [
+            ("袁绍", []),
+            ("袁术", []),
+        ]),
     ]),
     ("汉室", [
-        "汉灵帝 — 刘辩、刘协（子）",
-        "何太后（灵帝皇后）— 何进（兄）",
-        "刘协 — 董承（岳父）",
+        ("汉灵帝", [
+            ("刘辩", []),
+            ("刘协", [
+                ("董承（岳父）", []),
+            ]),
+        ]),
+        ("何太后（灵帝皇后）", []),
+        ("何进（何太后兄）", []),
     ]),
     ("其他", [
-        "董卓 — 吕布（义父子）",
-        "诸葛亮、荀彧、郭嘉、许褚、杨修、张郃、许攸（无家族谱）",
+        ("董卓", [
+            ("吕布（义子）", []),
+        ]),
     ]),
 ]
 
@@ -175,11 +198,18 @@ for group_name, members in GROUPS:
 
 cards_html = "\n".join(cards)
 
-# 生成家族谱 HTML
+# 生成家族谱树 HTML（递归渲染嵌套 ul/li）
+def render_tree(nodes, depth=0):
+    if not nodes:
+        return ""
+    items = []
+    for person, children in nodes:
+        items.append(f"<li>{person}{render_tree(children, depth+1)}</li>")
+    return f"<ul>{''.join(items)}</ul>"
+
 tree_blocks = []
-for fam_name, relations in FAMILY_TREE:
-    items = "".join(f'<li>{r}</li>' for r in relations)
-    tree_blocks.append(f'<div class="tree-fam"><h4>{fam_name}</h4><ul>{items}</ul></div>')
+for fam_name, nodes in FAMILY_TREE:
+    tree_blocks.append(f'<div class="tree-fam"><h4>{fam_name}</h4>{render_tree(nodes)}</div>')
 FAMILY_HTML = "\n".join(tree_blocks)
 
 html = f'''<!DOCTYPE html>
@@ -210,13 +240,17 @@ h3.group{{
 }}
 h3.group:first-of-type{{margin-top:10px;}}
 
-/* 家族谱 */
-.tree{{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:8px;}}
+/* 家族谱（族谱树） */
+.tree{{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:8px;}}
 .tree-fam{{background:#fafafa;border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;}}
-.tree-fam h4{{font-size:14px;color:#a0482e;margin:0 0 8px;letter-spacing:0.05em;border-bottom:1px dashed #ddd;padding-bottom:6px;}}
-.tree-fam ul{{list-style:none;margin:0;padding:0;font-size:12.5px;color:#444;line-height:1.8;}}
-.tree-fam li{{padding-left:14px;position:relative;}}
-.tree-fam li::before{{content:"—";position:absolute;left:0;color:#c9a227;}}
+.tree-fam h4{{font-size:14px;color:#a0482e;margin:0 0 10px;letter-spacing:0.05em;border-bottom:1px dashed #ddd;padding-bottom:6px;}}
+.tree-fam ul{{list-style:none;margin:0;padding:0;font-size:13px;color:#333;line-height:1.9;}}
+.tree-fam ul ul{{margin-left:16px;padding-left:14px;border-left:1.5px solid #d8b26a;}}
+.tree-fam li{{position:relative;padding-left:4px;}}
+.tree-fam li::before{{content:"└ ";color:#c9a227;}}
+.tree-fam ul ul li::before{{content:"├ ";color:#c9a227;}}
+.tree-fam ul ul li:last-child::before{{content:"└ ";color:#c9a227;}}
+.tree-fam ul ul li::after{{content:"";position:absolute;left:-14px;top:50%;width:14px;height:0;border-top:1.5px solid #d8b26a;}}
 
 /* 人物卡片：上下布局 —— 上角色形象，下演员照片 */
 .cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(700px,1fr));gap:18px;}}
