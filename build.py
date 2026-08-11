@@ -64,8 +64,9 @@ PEOPLE = [
 cards = []
 for name, disp, note, mv, tv, hist, mvchar, zly, tvshot, rel in PEOPLE:
     hist_img = img_path("images/history", hist) if hist else None
+    # 演员照片：电影配音用 actors/ 真人照，电视剧演员用 tv/ 剧照扮相（与上方剧照列同张图）
     mv_img = img_path("images/actors", mv) if mv else None
-    tv_img = img_path("images/actors", tv) if tv else None
+    tv_img = img_path("images/tv", tvshot) if tvshot else None  # 用角色名剧照（与上方《大军师司马懿》列同图）
     mvc_img = img_path("images/movie", mvchar) if mvchar else None
     zly_img = img_path("images/zhengluoyang", zly) if zly else None
     tvshot_img = img_path("images/tv", tvshot) if tvshot else None
@@ -83,17 +84,17 @@ for name, disp, note, mv, tv, hist, mvchar, zly, tvshot, rel in PEOPLE:
         shot_imgs.append(f'<figure class="ph"><img src="{tvshot_img}" alt="{name}电视剧剧照" loading="lazy"><figcaption>《大军师司马懿》</figcaption></figure>')
     shots_html = "".join(shot_imgs) if shot_imgs else '<div class="noimg">无画像</div>'
 
-    # 演员照片：电影配音 + 电视剧（横向，位于角色形象下方）
+    # 演员照片：电影配音用 actors/ 真人照，电视剧用 tv/ 剧照扮相（与上方剧照列同图）
     mv_html = (f'<figure class="ch"><img src="{mv_img}" alt="{mv}" loading="lazy">'
                f'<figcaption><span class="who">{mv}</span><span class="tag">电影配音</span></figcaption></figure>'
                if mv_img and mv else
                f'<figure class="ch empty"><div class="noimg">—</div>'
                f'<figcaption><span class="who dash">—</span><span class="tag">电影配音</span></figcaption></figure>')
     tv_html = (f'<figure class="ch"><img src="{tv_img}" alt="{tv}" loading="lazy">'
-               f'<figcaption><span class="who">{tv}</span><span class="tag">电视剧演员</span></figcaption></figure>'
+               f'<figcaption><span class="who">{tv}</span><span class="tag">电视剧演员（剧照）</span></figcaption></figure>'
                if tv_img and tv else
                f'<figure class="ch empty"><div class="noimg">—</div>'
-               f'<figcaption><span class="who dash">—</span><span class="tag">电视剧演员</span></figcaption></figure>')
+               f'<figcaption><span class="who dash">—</span><span class="tag">电视剧演员（剧照）</span></figcaption></figure>')
 
     cards.append(f'''
     <div class="card">
