@@ -82,6 +82,37 @@ GROUPS = [
     ("《争洛阳》群雄", ["吕布","董卓","何进","袁术","张让","刘辩","何太后"]),
 ]
 
+# 家族谱（只列名字与关系）
+FAMILY_TREE = [
+    ("曹氏", [
+        "曹嵩 — 曹操（父）",
+        "曹操 — 曹丕、曹植（子）",
+        "曹操 — 曹真（养子）、曹休（族子）、曹洪（堂弟）",
+        "曹丕 — 曹叡（子）",
+        "曹丕 — 甄宓（妻）、郭照（后妻）",
+        "曹真 — 曹爽（子）",
+        "曹操 — 夏侯惇（族兄弟）",
+    ]),
+    ("司马氏", [
+        "司马防 — 司马懿、司马孚（子）",
+        "司马懿 — 张春华（妻）、柏灵筠（侧室）",
+        "司马懿 — 司马师、司马昭（子）",
+        "侯吉（司马府管家，非血亲）",
+    ]),
+    ("袁氏", [
+        "袁绍、袁术（同父异母兄弟）",
+    ]),
+    ("汉室", [
+        "汉灵帝 — 刘辩、刘协（子）",
+        "何太后（灵帝皇后）— 何进（兄）",
+        "刘协 — 董承（岳父）",
+    ]),
+    ("其他", [
+        "董卓 — 吕布（义父子）",
+        "诸葛亮、荀彧、郭嘉、许褚、杨修、张郃、许攸（无家族谱）",
+    ]),
+]
+
 # 生成卡片 HTML（按分组输出，每组带标题）
 cards = []
 people_by_name = {p[0]: p for p in PEOPLE}
@@ -143,6 +174,13 @@ for group_name, members in GROUPS:
 
 cards_html = "\n".join(cards)
 
+# 生成家族谱 HTML
+tree_blocks = []
+for fam_name, relations in FAMILY_TREE:
+    items = "".join(f'<li>{r}</li>' for r in relations)
+    tree_blocks.append(f'<div class="tree-fam"><h4>{fam_name}</h4><ul>{items}</ul></div>')
+FAMILY_HTML = "\n".join(tree_blocks)
+
 html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -170,6 +208,14 @@ h3.group{{
   margin:28px 0 14px;
 }}
 h3.group:first-of-type{{margin-top:10px;}}
+
+/* 家族谱 */
+.tree{{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:8px;}}
+.tree-fam{{background:#fafafa;border:1px solid #e8e8e8;border-radius:10px;padding:14px 16px;}}
+.tree-fam h4{{font-size:14px;color:#a0482e;margin:0 0 8px;letter-spacing:0.05em;border-bottom:1px dashed #ddd;padding-bottom:6px;}}
+.tree-fam ul{{list-style:none;margin:0;padding:0;font-size:12.5px;color:#444;line-height:1.8;}}
+.tree-fam li{{padding-left:14px;position:relative;}}
+.tree-fam li::before{{content:"—";position:absolute;left:0;color:#c9a227;}}
 
 /* 人物卡片：上下布局 —— 上角色形象，下演员照片 */
 .cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(700px,1fr));gap:18px;}}
@@ -238,6 +284,11 @@ table.geo{{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
     融合三部作品：<b>动画电影《三国的星空第一部》</b>（讨董→官渡）、<b>电视剧《大军师司马懿》</b>（军师联盟 / 虎啸龙吟）与<b>《三国第一部：争洛阳》</b>（黄巾→虎牢关）。
     每个角色横排展示历史画像与动画形象，注明电影/电视剧扮演者，并附角色关系简介。
   </p>
+
+  <h2>家族谱</h2>
+  <div class="tree">
+{FAMILY_HTML}
+  </div>
 
   <h2>人物</h2>
   <p class="sub">上下布局：上方为角色形象（历史画像、《三国的星空》《争洛阳》动画剧照），下方为对应演员照片与名字。附角色关系简介。</p>
