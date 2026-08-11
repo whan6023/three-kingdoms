@@ -112,7 +112,7 @@ for name, disp, note, mv, tv, hist, mvchar, zly, rel in PEOPLE:
     zly_img = img_path("images/zhengluoyang", zly) if zly else None
     note_html = f'<span class="note">{note}</span>' if note else ""
 
-    # 左侧：历史画像 + 三国的星空 + 争洛阳，横排
+    # 角色形象（历史/三国的星空/争洛阳）—— 顶部横排
     left_imgs = []
     if hist_img:
         left_imgs.append(f'<figure class="ph"><img src="{hist_img}" alt="{name}历史画像" loading="lazy"><figcaption>历史画像</figcaption></figure>')
@@ -120,9 +120,9 @@ for name, disp, note, mv, tv, hist, mvchar, zly, rel in PEOPLE:
         left_imgs.append(f'<figure class="ph"><img src="{mvc_img}" alt="{name}三国的星空形象" loading="lazy"><figcaption>《三国的星空》</figcaption></figure>')
     if zly_img:
         left_imgs.append(f'<figure class="ph"><img src="{zly_img}" alt="{name}争洛阳形象" loading="lazy"><figcaption>《争洛阳》</figcaption></figure>')
-    left_html = "".join(left_imgs) if left_imgs else '<div class="noimg">无画像</div>'
+    images_html = "".join(left_imgs) if left_imgs else '<div class="noimg">无画像</div>'
 
-    # 右侧：电影配音演员 + 电视剧演员（横向两张）
+    # 演员照片：电影配音 + 电视剧（横向，位于角色形象下方）
     mv_html = (f'<figure class="ch"><img src="{mv_img}" alt="{mv}" loading="lazy">'
                f'<figcaption><span class="who">{mv}</span><span class="tag">电影配音</span></figcaption></figure>'
                if mv_img and mv else
@@ -136,15 +136,15 @@ for name, disp, note, mv, tv, hist, mvchar, zly, rel in PEOPLE:
 
     cards.append(f'''
     <div class="card">
-      <div class="left">{left_html}</div>
-      <div class="info">
+      <div class="head">
         <div class="nm">{disp}</div>
         {note_html}
         <p class="rel">{rel}</p>
-        <div class="channels">
-          {mv_html}
-          {tv_html}
-        </div>
+      </div>
+      <div class="shots">{images_html}</div>
+      <div class="channels">
+        {mv_html}
+        {tv_html}
       </div>
     </div>''')
 
@@ -172,17 +172,13 @@ h2{{
 }}
 .sub{{font-size:12.5px;color:#888;margin:-8px 0 12px;}}
 
-/* 人物卡片 */
-.cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(760px,1fr));gap:18px;}}
+/* 人物卡片：上下布局 —— 上角色形象，下演员照片 */
+.cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(700px,1fr));gap:18px;}}
 .card{{
-  display:flex;gap:18px;background:#fafafa;border:1px solid #e8e8e8;
-  border-radius:12px;padding:18px;align-items:flex-start;
+  display:flex;flex-direction:column;gap:14px;background:#fafafa;
+  border:1px solid #e8e8e8;border-radius:12px;padding:18px;
 }}
-.left{{flex:0 0 auto;display:flex;flex-direction:row;gap:10px;flex-wrap:wrap;}}
-.ph{{margin:0;width:150px;}}
-.ph img{{width:150px;height:182px;object-fit:cover;border-radius:8px;display:block;background:#eee;}}
-.ph figcaption{{font-size:11px;color:#999;text-align:center;margin-top:4px;}}
-.info{{flex:1;min-width:0;}}
+.head{{border-bottom:1px dashed #ddd;padding-bottom:12px;}}
 .nm{{font-size:20px;font-weight:700;}}
 .nm .py{{display:block;font-size:12px;font-weight:400;color:#a0482e;margin-top:2px;}}
 .note{{display:block;font-size:12px;color:#888;margin-top:3px;}}
@@ -192,14 +188,18 @@ h2{{
   padding:8px 10px;border-radius:0 6px 6px 0;
   margin-top:10px;
 }}
-.channels{{display:flex;gap:14px;margin-top:14px;}}
-.ch{{flex:1;margin:0;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 10px 10px;}}
-.ch img{{width:96px;height:118px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}}
-.ch figcaption{{font-size:12.5px;}}
+.shots{{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}}
+.ph{{margin:0;width:150px;}}
+.ph img{{width:150px;height:182px;object-fit:cover;border-radius:8px;display:block;background:#eee;}}
+.ph figcaption{{font-size:11px;color:#999;text-align:center;margin-top:4px;}}
+.channels{{display:flex;gap:14px;justify-content:center;border-top:1px dashed #ddd;padding-top:12px;}}
+.ch{{flex:0 1 200px;margin:0;text-align:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 10px 10px;}}
+.ch img{{width:110px;height:135px;object-fit:cover;border-radius:6px;display:block;margin:0 auto 8px;background:#eee;}}
+.ch figcaption{{font-size:13px;}}
 .ch .who{{display:block;font-weight:600;}}
 .ch .who.dash{{color:#ccc;font-weight:400;}}
-.ch .tag{{display:block;font-size:10.5px;color:#999;margin-top:2px;}}
-.ch.empty .noimg{{width:96px;height:118px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}}
+.ch .tag{{display:block;font-size:11px;color:#999;margin-top:2px;}}
+.ch.empty .noimg{{width:110px;height:135px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;color:#ccc;margin:0 auto 8px;}}
 .noimg{{display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;}}
 
 /* 地图 */
@@ -221,10 +221,11 @@ table.geo{{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
 .footnote{{font-size:11.5px;color:#999;text-align:center;margin-top:28px;border-top:1px solid #eee;padding-top:14px;}}
 @media (max-width:560px){{
   .cards{{grid-template-columns:1fr;}}
-  .card{{flex-direction:column;}}
-  .left{{flex-direction:row;}}
   .ph{{width:110px;}}
   .ph img{{width:110px;height:134px;}}
+  .ch{{flex:0 1 150px;}}
+  .ch img{{width:88px;height:108px;}}
+  .ch.empty .noimg{{width:88px;height:108px;}}
 }}
 </style>
 </head>
@@ -237,7 +238,7 @@ table.geo{{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
   </p>
 
   <h2>人物</h2>
-  <p class="sub">横排三图：历史画像、《三国的星空》《争洛阳》动画形象（该作品未出现的角色缺省）；右侧为扮演者照片与关系简介。</p>
+  <p class="sub">上下布局：上方为角色形象（历史画像、《三国的星空》《争洛阳》动画剧照），下方为对应演员照片与名字。附角色关系简介。</p>
   <div class="cards">
 {cards_html}
   </div>
