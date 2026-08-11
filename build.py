@@ -175,12 +175,29 @@ for group_name, members in GROUPS:
 
 cards_html = "\n".join(cards)
 
-# 生成家族谱 HTML（每行一个辈分，同辈横排）
+# 生成家族谱 HTML（每行一个辈分，同辈横排；有电视剧剧照的角色贴小图）
+import re as _re
+
+def _tv_key(name):
+    """从家族成员名解析出电视剧剧照文件名 key"""
+    core = _re.sub(r"（.*?）|\(.*?\)", "", name).strip()
+    if core == "刘协":
+        return "汉献帝刘协"
+    return core
+
+def _chip(member):
+    tvk = _tv_key(member)
+    tvi = img_path("images/tv", tvk)
+    if tvi:
+        return (f'<span class="gen-chip"><img src="{tvi}" alt="{member}" loading="lazy">'
+                f'<span class="chip-name">{member}</span></span>')
+    return f'<span class="gen-chip"><span class="chip-name">{member}</span></span>'
+
 tree_blocks = []
 for fam_name, rows in FAMILY_TREE:
     rows_html = []
     for gen_label, members in rows:
-        chips = "".join(f'<span class="gen-chip">{m}</span>' for m in members)
+        chips = "".join(_chip(m) for m in members)
         rows_html.append(
             f'<div class="gen-row"><span class="gen-label">{gen_label}</span>'
             f'<div class="gen-members">{chips}</div></div>'
@@ -224,7 +241,9 @@ h3.group:first-of-type{{margin-top:10px;}}
 .gen-row:last-child{{border-bottom:none;}}
 .gen-label{{flex:0 0 44px;font-size:12px;color:#a0482e;font-weight:600;letter-spacing:0.05em;}}
 .gen-members{{display:flex;flex-wrap:wrap;gap:6px;}}
-.gen-chip{{font-size:13px;color:#333;background:#fff;border:1px solid #eee;border-radius:999px;padding:2px 10px;white-space:nowrap;}}
+.gen-chip{{font-size:13px;color:#333;background:#fff;border:1px solid #eee;border-radius:8px;padding:4px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}}
+.gen-chip img{{width:34px;height:42px;object-fit:cover;border-radius:5px;background:#eee;}}
+.chip-name{{padding-right:6px;}}
 
 /* 人物卡片：上下布局 —— 上角色形象，下演员照片 */
 .cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(700px,1fr));gap:18px;}}
