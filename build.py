@@ -3,7 +3,7 @@
 """生成三国融合页面 index.html（人物卡片含历史画像+电影角色图+演员照片+地图）"""
 import json, os
 
-REPO = "/tmp/three-kingdoms-repo"
+REPO = os.path.dirname(os.path.abspath(__file__))
 
 def img_path(folder, name, ext=None):
     """返回图片相对路径，若文件不存在返回 None"""
@@ -186,10 +186,16 @@ def _tv_key(name):
     return core
 
 def _chip(member):
+    """家族谱成员 chip；依次在 tv→movie→zhengluoyang→history 目录找小图"""
     tvk = _tv_key(member)
-    tvi = img_path("images/tv", tvk)
-    if tvi:
-        return (f'<span class="gen-chip"><img src="{tvi}" alt="{member}" loading="lazy">'
+    candidates = []
+    for folder in ("images/tv", "images/movie", "images/zhengluoyang", "images/history"):
+        p = img_path(folder, tvk)
+        if p:
+            candidates.append(p)
+    if candidates:
+        src = candidates[0]
+        return (f'<span class="gen-chip"><img src="{src}" alt="{member}" loading="lazy">'
                 f'<span class="chip-name">{member}</span></span>')
     return f'<span class="gen-chip"><span class="chip-name">{member}</span></span>'
 
